@@ -14,6 +14,10 @@
 
 7. Delete the deployment
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/workloads/controllers/deployment/](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

@@ -6,6 +6,10 @@
 
 3. Delete the pod
 
+## Documentation
+
+[https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
