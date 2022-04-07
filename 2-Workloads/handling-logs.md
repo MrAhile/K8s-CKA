@@ -63,7 +63,7 @@ spec:
       command:
       - "/bin/sh"
       - "-c"
-      - "while true; do cat /var/log/nginx/access.log /var/log/nginx/error.log; sleep 10; done"]
+      - "while true; do cat /var/log/nginx/access.log /var/log/nginx/error.log; sleep 10; done"
       volumeMounts:
         - name: logs
           mountPath: /var/log/nginx
