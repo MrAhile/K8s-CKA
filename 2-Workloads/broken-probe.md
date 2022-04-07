@@ -52,6 +52,30 @@ spec:
 
 The nginx container is restarted many times.
 
+```
+k get po
+NAME                     READY   STATUS             RESTARTS      AGE
+nginx-65bbc7db4d-664xr   0/1     CrashLoopBackOff   6 (27s ago)   4m12s
+```
+
+Describing the pod gives additional information indicating the liveness probe always fails:
+
+```
+k describe po nginx-65bbc7db4d-664xr
+...
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  26s               default-scheduler  Successfully assigned default/nginx-65bbc7db4d-664xr to worker2
+  Normal   Pulling    25s               kubelet            Pulling image "nginx:1.20-alpine"
+  Normal   Pulled     21s               kubelet            Successfully pulled image "nginx:1.20-alpine" in 3.80023247s
+  Normal   Created    6s (x2 over 21s)  kubelet            Created container nginx
+  Normal   Killing    6s                kubelet            Container nginx failed liveness probe, will be restarted
+  Normal   Pulled     6s                kubelet            Container image "nginx:1.20-alpine" already present on machine
+  Normal   Started    5s (x2 over 21s)  kubelet            Started container nginx
+  Warning  Unhealthy  1s (x4 over 16s)  kubelet            Liveness probe failed: Get "http://10.32.128.5:8080/": dial tcp 10.32.128.5:8080: connect: connection refused
+```
+
 4. Fix the probe so it checks on port 80
 
 ```
