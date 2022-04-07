@@ -8,6 +8,10 @@
 
 4. Delete the pod
 
+## Documentation
+
+[https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

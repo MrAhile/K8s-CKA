@@ -14,6 +14,10 @@ token=cb3456a54EB5
 
 5. Delete the pod and the Secret
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/configuration/secret/](https://kubernetes.io/docs/concepts/configuration/secret/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

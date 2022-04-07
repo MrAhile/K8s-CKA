@@ -12,6 +12,10 @@
 
 6. Delete the pod
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#example-1](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#example-1)
+
 <details>
   <summary markdown="span">Solution</summary>
 

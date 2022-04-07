@@ -8,6 +8,10 @@
 
 4. Delete the pod
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/workloads/pods/](https://kubernetes.io/docs/concepts/workloads/pods/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
