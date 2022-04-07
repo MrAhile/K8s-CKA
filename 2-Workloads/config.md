@@ -14,6 +14,10 @@
 
 7. Delete the ConfigMap and the pods
 
+## Useful links
+
+[https://kubernetes.io/docs/concepts/configuration/configmap/](https://kubernetes.io/docs/concepts/configuration/configmap/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
