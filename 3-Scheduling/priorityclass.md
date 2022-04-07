@@ -16,6 +16,10 @@
 
 8. Delete the pods, the PriorityClass, and remove the disktype label from worker1 
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
+
 <details>
   <summary markdown="span">Solution</summary>
 

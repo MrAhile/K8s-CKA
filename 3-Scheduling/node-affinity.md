@@ -12,6 +12,9 @@
 
 6. Delete the pod
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)
 
 <details>
   <summary markdown="span">Solution</summary>

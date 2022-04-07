@@ -12,6 +12,10 @@
 
 6. Delete the deployment
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

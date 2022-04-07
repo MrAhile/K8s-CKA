@@ -8,6 +8,10 @@
 
 4. Delete the deployment and revert your changes back
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
