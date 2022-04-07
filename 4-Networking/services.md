@@ -14,6 +14,10 @@ Note: the podinfo container listens on port 9898
 
 6. Delete the service and pod
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/services-networking/service/](https://kubernetes.io/docs/concepts/services-networking/service/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
