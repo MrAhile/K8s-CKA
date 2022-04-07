@@ -19,6 +19,8 @@ multipass launch -n worker2 -c 2 -m 2G -d 10G
 
 Note: by default Multipass create a VM with 1G Ram, 1 CPU and 5G Disk 
 
+For the next steps, I'd recommend you open 4 terminals, one on the host machine and one for each VM.
+
 2. Installation of the dependencies
 
 First, using the following commands, install the dependencies (the container runtime and a couple of libraries) on each node. Also note the version of the cluster is also specified.
@@ -59,8 +61,8 @@ kubeadm join 10.96.217.40:6443 --token ucvk2f.vsj6636g36lwwu6x \
 Still from the master node, retrieve the admin kubeconfig and save it in $HOME/.kube/config (default location to configure kubectl client)
 
 ```
-mkdir /home/ubuntu/.kube
-sudo cat /etc/kubernetes/admin.conf > /home/ubuntu/.kube/config
+mkdir $HOME/.kube
+sudo cat /etc/kubernetes/admin.conf > $HOME/.kube/config
 ```
 
 4. Add worker nodes
