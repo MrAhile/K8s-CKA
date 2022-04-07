@@ -2,7 +2,7 @@
 
 1. Create the specification of a DaemonSet named *log*. Each pod must be based on the alpine:3.15 image they must be configured to read the log files located in */var/log/pods* on the node and stream them on their stdout
 
-Note: path of the log files to stream is */var/log/pods/*/*/*.log
+Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 
 2. Create the DaemonSet. Where are the pods scheduled ? 
 
@@ -11,6 +11,10 @@ Note: path of the log files to stream is */var/log/pods/*/*/*.log
 4. Verify the pod can stream the node's log
 
 5. Delete the DaemonSet
+
+## Documentation
+
+[https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 
 <details>
   <summary markdown="span">Solution</summary>

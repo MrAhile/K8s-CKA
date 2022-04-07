@@ -20,6 +20,10 @@ k run ab -ti --rm --restart='Never' --image=lucj/ab -- -n 100000 -c 50 http://ww
 
 7. Delete the HPA, the Deployment and the Service
 
+## Documentation
+
+[https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

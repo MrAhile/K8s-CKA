@@ -10,6 +10,11 @@
 
 5. Delete the job and cronjob
 
+## Documentation
+
+- [https://kubernetes.io/docs/concepts/workloads/controllers/job/](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+- [https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
