@@ -4,17 +4,21 @@
 
 Note: it can be installed from [https://luc.run/metrics-server.yaml](https://luc.run/metrics-server.yaml)
 
-2. Create the Deployment *www* with a single replica based on nginx and expose the Pods with a ClusterIP Service named *www*
+2. Create the specification of a deployment named *www* with a single replica based on nginx
 
-3. Create a HorizontalPodAutoscaller with a target CPU of 50% and with a minimum of 3 and a maximum of 10 replicas
+3. Modify the specification adding 100Mi memory and 50m cpu request and create the deployment.
 
-4. Run a stress Pod (command below) and verify the number of replicas are increased
+4. Expose the pods with a Service named *www*
+
+5. Create a HorizontalPodAutoscaller with a target CPU of 50% and with a minimum of 3 and a maximum of 10 replicas
+
+6. Run a stress Pod (command below) and verify the number of replicas are increased
 
 ```
 k run ab -ti --rm --restart='Never' --image=lucj/ab -- -n 100000 -c 50 http://www/
 ```
 
-5. Delete the HPA, the Deployment and the Service
+7. Delete the HPA, the Deployment and the Service
 
 <details>
   <summary markdown="span">Solution</summary>
@@ -44,39 +48,71 @@ mongo   5m           68Mi
 nginx   0m           3Mi
 ```
 
-2. Create a Deployment with a single replica based on nginx and expose the Pods with a Service named *www*
+2. Create the specification of a deployment named *www* with a single replica based on nginx
+
+```
+k create deploy www --image=nginx:1.20 --dry-run=client -o yaml > deploy.yaml
+```
+
+3. Modify the specification adding 100Mi memory and 50m cpu request and create the deployment.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: www
+  name: www
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: www
+  template:
+    metadata:
+      labels:
+        app: www
+    spec:
+      containers:
+      - image: nginx:1.20
+        name: nginx
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 50m
+```
 
 Creation of the Deployment
 
 ```
-k create deploy www --image=nginx:1.20
+k apply -f deploy.yaml
 ```
 
-Exposition with a Service
+4. Expose the pods with a Service named *www*
 
 ```
 k expose deploy/www --name=www --port=80
 ```
 
-3. Create a HorizontalPodAutoscaller with a target CPU of 50% and with a minimum of 3 and a maximum of 10 replicas
+5. Create a HorizontalPodAutoscaller with a target CPU of 50% and with a minimum of 3 and a maximum of 10 replicas
 
 ```
 k autoscale deploy www --min=3 --max=10 --cpu-percent=50
 ```
 
-4. Run a stress Pod (command below) and verify the number of replicas are increased
+6. Run a stress Pod and verify the number of replicas are increased
 
 ```
-k run ab -ti --rm --restart='Never' --image=lucj/ab -- -n 100000 -c 100 http://www/
+k run ab -ti --rm --restart='Never' --image=lucj/ab -- -n 100000 -c 50 http://www/
 ```
 
-Get the number of replicas:
+See the evolution of the number of replicas:
 
 ```
-kubectl get pod
+k get hpa -w
 ```
 
-5. Delete the HPA, the Deployment and the Service
+7. Delete the HPA, the Deployment and the Service
 
 ```
 k delete deploy/www svc/www hpa/www
