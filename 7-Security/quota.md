@@ -8,7 +8,9 @@
 
 4. What do you observe ?
 
-5. Delete the deployment, the quota and the namespace
+5. Get the events which show that some of the pods cannot be created
+
+6. Delete the deployment, the quota and the namespace
 
 ## Documentation
 
@@ -49,7 +51,21 @@ ghost-5d77b859d5-kbdf4   1/1     Running   0          26s
 ghost-5d77b859d5-w8rfm   1/1     Running   0          26s
 ```
 
-5. Delete the deployment, the quota and the namespace
+5. Get the events which show that some of the pods cannot be created
+
+We can get all the events in the *dev* namespace
+
+```
+k -n dev get events
+```
+
+To get only the one which indicate a creation failure we can add a filter on the *reason* field:
+
+```
+k -n dev get events --field-selector reason=FailedCreate
+```
+
+6. Delete the deployment, the quota and the namespace
 
 ```
 k -n dev delete deploy/ghost quota/limit-pod-number 
