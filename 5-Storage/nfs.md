@@ -12,7 +12,7 @@ Note: you can use the command `showmount -e share.techwhale.io`
 
 Installation instruction can be found at [https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
 
-Note: make sure the helm client is installed on your environment first
+Warning: make sure to use the name of the server (*share.techwhale.io*) and the exported path (*/nfs-export*) when installing the provisioner 
 
 3. Make sure a StorageClass has been created
 
