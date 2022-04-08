@@ -10,6 +10,10 @@
 
 5. Delete the deployment, the quota and the namespace
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/policy/resource-quotas/](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

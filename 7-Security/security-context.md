@@ -6,6 +6,10 @@
 
 3. Delete the Pod
 
+## Documentation
+
+[https://kubernetes.io/docs/tasks/configure-pod-container/security-context/](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+
 <details>
   <summary markdown="span">Solution</summary>
 

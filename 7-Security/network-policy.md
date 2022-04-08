@@ -10,6 +10,10 @@
 
 5. Delete the dev namespace
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/services-networking/network-policies/](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
