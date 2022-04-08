@@ -12,7 +12,7 @@ Note: you can use the command `showmount -e share.techwhale.io`
 
 Installation instruction can be found at [https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
 
-Note: the helm client is already installed on your host machine and on your master node
+Note: make sure the helm client is installed on your environment first
 
 3. Make sure a StorageClass has been created
 
@@ -29,6 +29,10 @@ Note: the container can use a command similar to "while true; do echo hello from
 7. Check the content of /tmp/share/index.html inside the pod's container
 
 8. Delete the pod, the pvc and uninstall the NFS provisioner.
+
+## Documentation
+
+[https://kubernetes.io/docs/concepts/storage/storage-classes/](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 
 <details>
   <summary markdown="span">Solution</summary>

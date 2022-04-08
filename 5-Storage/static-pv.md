@@ -22,6 +22,11 @@ Hint: you can use the nodeAffinity property in the PersistentVolume specificatio
 
 10. Delete the pod, the pv and the pvc. Also remove the /tmp/data folder on worker1
 
+## Documentation
+
+- [https://kubernetes.io/docs/concepts/storage/persistent-volumes/](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+- [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)
+
 <details>
   <summary markdown="span">Solution</summary>
 
