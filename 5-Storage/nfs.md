@@ -1,3 +1,5 @@
+:warning: This exercise requires a specific configuration and cannot be performed outside of supervised training.
+
 ## Exercise
 
 A NFS server is available on *share.techwhale.io*, it exports */nfs-export*
@@ -14,7 +16,7 @@ Installation instruction can be found at [https://github.com/kubernetes-sigs/nfs
 
 Warning: make sure to use the name of the server (*share.techwhale.io*) and the exported path (*/nfs-export*) when installing the provisioner 
 
-3. Make sure a StorageClass has been created
+3. Make sure the provisoner is running fine and a StorageClass has been created
 
 4. Create a PersistentVolumeClaim requesting 100Mi of storage and referencing this StorageClass
 
@@ -24,7 +26,7 @@ Note: you can specify the *ReadWriteMany* accessMode
 
 6. Create a pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
 
-Note: the container can use a command similar to "while true; do echo hello from YOUR_FIRSTNAME at $(date) >> /tmp/share/index.html; sleep 3600; done"
+Note: the container can use a command similar to "while true; do echo hello from YOUR_FIRSTNAME at $(date) >> /tmp/share/index.html; sleep 100000; done". Make sure to replace *YOUR_FIRSTNAME* with your firstname :)
 
 7. Check the content of /tmp/share/index.html inside the pod's container
 
@@ -61,9 +63,15 @@ Install the NFS provisioner providing the path towards the NFS server and the na
 helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server=share.techwhale.io --set nfs.path=/nfs-export
 ```
 
-3. Make sure a storage class has been created
+3. Make sure the provisoner is running fine and a StorageClass has been created
 
-The *nfs-client* storage class has been created
+Making sure the provisioner is running fine:
+
+```
+k get po -l app=nfs-subdir-external-provisioner
+```
+
+The *nfs-client* storage class has been created:
 
 ```
 k get sc

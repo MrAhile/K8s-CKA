@@ -1,6 +1,10 @@
+:warning: This exercise requires a specific configuration and cannot be performed outside of supervised training.
+
 ## Exercise
 
 1. Install the NGinx ingress controller with Helm
+
+Note: first make sure you have the Helm client installed, then use the following documentation to install the Nginx Ingress Controller: [https://kubernetes.github.io/ingress-nginx/deploy/#quick-start](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
 
 2. How is the ingress controller exposed ? What is the external IP of the service ?
 
@@ -13,6 +17,8 @@ Note: run the ```setup-ingress-proxy.sh``` script located in the $HOME directory
 5. Create a pod named *ghost* based on the ghost:4 image and expose it with a ClusterIP service
 
 6. Create an ingress resource that expose the above service on ghost.YOUR_HOST_IP.nip.io
+
+Note: YOUR_HOST_IP is the IP of the machine on which you created the cluster's VMs
 
 7. Verify you can access the ghost web interface from the outside
 
