@@ -3,37 +3,38 @@
 1. Check the version of your cluster
 
 ```
-k get no
+kubectl get no
 NAME      STATUS   ROLES                  AGE   VERSION
-master    Ready    control-plane,master   32m   v1.22.7
-worker1   Ready    <none>                 23m   v1.22.7
-worker2   Ready    <none>                 18m   v1.22.7
+master    Ready    control-plane,master   32m   v1.24.7
+worker1   Ready    <none>                 23m   v1.24.7
+worker2   Ready    <none>                 18m   v1.24.7
 ```
 
 Note: in this exercise, we consider a 3 nodes kubeadm cluster (1 master and 2 worker nodes), you'll need to adapt the procedure a little bit if your cluster has a different composition
 
 2. Upgrade the master node
 
-Check the latest version of kubeadm
+Run a shell on the master node and check the latest version of kubeadm
 
 ```
 sudo apt update && sudo apt-cache policy kubeadm
 ```
 
-The output below specify that we should upgrade the cluster from 1.22.7 to 1.23.5:
+The output below specify that we should upgrade the cluster from 1.24.7 to 1.25.3:
 ```
 kubeadm:
-  Installed: 1.22.7-00
-  Candidate: 1.23.5-00
+  Installed: 1.24.7-00
+  Candidate: 1.25.3-00
 ...
 ```
 
 First upgrade kubeadm
 
 ```
+VERSION=1.25.3-00
 sudo apt-mark unhold kubeadm && \
 sudo apt-get update && \
-sudo apt-get install -y kubeadm=1.23.5-00 && \
+sudo apt-get install -y kubeadm=$VERSION && \
 sudo apt-mark hold kubeadm
 ```
 
@@ -52,10 +53,10 @@ sudo kubeadm upgrade plan
 If the previous command went fine we can run the upgrade
 
 ```
-sudo kubeadm upgrade apply v1.23.5
+sudo kubeadm upgrade apply v1.25.3
 ```
 
-Next we uncordon the master node, making it "schedulabel" again
+Next we uncordon the master node, making it "schedulable" again
 
 ```
 kubectl uncordon master
@@ -64,9 +65,10 @@ kubectl uncordon master
 Then we upgrade kubelet et kubectl, and restart kubelet:
 
 ```
+VERSION=1.25.3-00
 sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && \
-sudo apt-get install -y kubelet=1.23.5-00 kubectl=1.23.5-00 && \
+sudo apt-get install -y kubelet=$VERSION kubectl=$VERSION && \
 sudo apt-mark hold kubelet kubectl && \
 sudo systemctl restart kubelet
 ```
@@ -74,11 +76,11 @@ sudo systemctl restart kubelet
 If we check the node versions, we can see the master node is upgraded:
 
 ```
-k get no
-NAME      STATUS   ROLES                  AGE   VERSION
-master    Ready    control-plane,master   119m   v1.23.5
-worker1   Ready    <none>                 110m   v1.22.7
-worker2   Ready    <none>                 105m   v1.22.7
+kubectl get no
+NAME      STATUS     ROLES           AGE   VERSION
+master    NotReady   control-plane   39m   v1.25.3
+worker1   Ready      <none>          30m   v1.24.7
+worker2   Ready      <none>          30m   v1.24.7
 ```
 
 Note: if the cluster has several master nodes they need to be upgraded next. The upgrade command would be slightly different and would look like ```kubeadm upgrade NODE_IDENTIFIER```
@@ -87,16 +89,17 @@ Note: if the cluster has several master nodes they need to be upgraded next. The
 
 Note: this procedure shows the upgrade of worker1, the same steps must be done for the other worker nodes as well
 
-First upgrade the kubeadm binary:
+First run a shell on worker1 and upgrade the kubeadm binary:
 
 ```
+VERSION=1.25.3-00
 sudo apt-mark unhold kubeadm && \
 sudo apt-get update && \
-sudo apt-get install -y kubeadm=1.23.5-00 && \
+sudo apt-get install -y kubeadm=$VERSION && \
 sudo apt-mark hold kubeadm
 ```
 
-Next, drain the node (this command cannot be run from the worker)
+Next, drain the node (run the following command from the master node):
 
 ```
 kubectl drain worker1 --ignore-daemonsets
@@ -111,14 +114,15 @@ sudo kubeadm upgrade node
 Then we upgrade kubelet et kubectl, and restart kubelet:
 
 ```
+VERSION=1.25.3-00
 sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && \
-sudo apt-get install -y kubelet=1.23.5-00 kubectl=1.23.5-00 && \
+sudo apt-get install -y kubelet=$VERSION kubectl=$VERSION && \
 sudo apt-mark hold kubelet kubectl && \
 sudo systemctl restart kubelet
 ```
 
-Next, uncordon the worker node, making it "schedulabel" again (this command cannot be run from the worker):
+Next, uncordon the worker node, making it "schedulable" again (run the following command from the master node):
 
 ```
 kubectl uncordon worker1
@@ -127,11 +131,11 @@ kubectl uncordon worker1
 If we check the node versions, we can see the master node and the worker1 are upgraded:
 
 ```
-k get no
+kubectl get no
 NAME      STATUS   ROLES                  AGE    VERSION
-master    Ready    control-plane,master   135m   v1.23.5
-worker1   Ready    <none>                 125m   v1.23.5
-worker2   Ready    <none>                 120m   v1.22.7
+master    Ready    control-plane   42m   v1.25.3
+worker1   Ready    <none>          33m   v1.25.3
+worker2   Ready    <none>          33m   v1.24.7
 ```
 
 4. Accessing the upgraded cluster
@@ -139,10 +143,10 @@ worker2   Ready    <none>                 120m   v1.22.7
 After the above steps are done on the other worker node, the cluster will be fully upgraded cluster:
 
 ```
-k get no
-NAME      STATUS   ROLES                  AGE    VERSION
-master    Ready    control-plane,master   138m   v1.23.5
-worker1   Ready    <none>                 129m   v1.23.5
-worker2   Ready    <none>                 124m   v1.23.5
+kubectl get no
+NAME      STATUS   ROLES           AGE   VERSION
+master    Ready    control-plane   44m   v1.25.3
+worker1   Ready    <none>          35m   v1.25.3
+worker2   Ready    <none>          35m   v1.25.3
 ```
 

@@ -28,19 +28,19 @@ First, using the following commands, install the dependencies (the container run
 - from a shell on the master node:
 
 ```
-curl https://luc.run/kubeadm/master.sh | VERSION=1.22.7 sh
+curl https://luc.run/kubeadm/master.sh | VERSION=1.24.7 sh
 ```
 
 - from a shell on worker1:
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.22.7 sh
+curl https://luc.run/kubeadm/worker.sh | VERSION=1.24.7 sh
 ```
 
 - from a shell on worker2
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.22.7 sh
+curl https://luc.run/kubeadm/worker.sh | VERSION=1.24.7 sh
 ```
 
 3. Initialisation of the cluster
@@ -72,11 +72,11 @@ Run the above command on worker1 and worker2 to add these nodes to the cluster.
 When this is done, go back to the master node and list the cluster's nodes. You should now see the cluster contains 3 nodes:
 
 ```
-k get no
+kubectl get no
 NAME      STATUS     ROLES                  AGE     VERSION
-master    NotReady   control-plane,master   7m7s    v1.22.7
-worker1   NotReady   <none>                 4m54s   v1.22.7
-worker2   NotReady   <none>                 4m14s   v1.22.7
+master    NotReady   control-plane,master   7m7s    v1.24.7
+worker1   NotReady   <none>                 4m54s   v1.24.7
+worker2   NotReady   <none>                 4m14s   v1.24.7
 ```
 
 5. Network plugin
@@ -84,17 +84,17 @@ worker2   NotReady   <none>                 4m14s   v1.22.7
 The above result shows the cluster is not ready yet, we need to install a network plugin first. In this example we will install WeaveNet but another network plugin could be installed instead.
 
 ```
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.IPALLOC_RANGE=10.32.0.0/16"
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml
 ```
 
 After a few tens of seconds the cluster will be ready:
 
 ```
-k get no
+kubectl get no
 NAME      STATUS   ROLES                  AGE     VERSION
-master    Ready    control-plane,master   10m     v1.22.7
-worker1   Ready    <none>                 8m22s   v1.22.7
-worker2   Ready    <none>                 7m42s   v1.22.7
+master    Ready    control-plane,master   10m     v1.24.7
+worker1   Ready    <none>                 8m22s   v1.24.7
+worker2   Ready    <none>                 7m42s   v1.24.7
 ```
 
 6. Get kubeconfig on the host machine
@@ -105,15 +105,16 @@ In case you deployed the VM with multipass, use the following command from the h
 
 ```
 multipass exec master -- sudo cat /etc/kubernetes/admin.conf > kubeconfig.cfg
-mkdir $HOME/.kube && cp kubeconfig.cfg $HOME/.kube/config
+mkdir $HOME/.kube 2>/dev/null
+cp kubeconfig.cfg $HOME/.kube/config
 ```
 
 You can now communicate with the cluster from the host machine directly (without sshing on the master node anymore)
 
 ```
-k get no
+kubectl get no
 NAME      STATUS   ROLES                  AGE   VERSION
-master    Ready    control-plane,master   13m   v1.22.7
-worker1   Ready    <none>                 10m   v1.22.7
-worker2   Ready    <none>                 10m   v1.22.7
+master    Ready    control-plane,master   13m   v1.24.7
+worker1   Ready    <none>                 10m   v1.24.7
+worker2   Ready    <none>                 10m   v1.24.7
 ```
