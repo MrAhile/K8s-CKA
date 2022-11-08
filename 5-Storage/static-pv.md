@@ -171,7 +171,7 @@ www    1/1     Running   0          4s    10.32.0.2   worker1   <none>          
 From a shell on worker1
 
 ```
-echo "hello" > sudo tee /tmp/data/index.html
+echo "hello" | sudo tee /tmp/data/index.html
 ```
 
 9. Send a request to the nginx container and make sure you get the content of the previous file

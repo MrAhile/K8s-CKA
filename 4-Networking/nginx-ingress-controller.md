@@ -70,9 +70,11 @@ k run ghost --image=ghost:4 --port 2368 --expose
 
 6. Create an ingress resource that expose the above service on ghost.YOUR_HOST_IP.nip.io
 
-In this exemple the public IP adress of the host machine is *89.145.162.67*
+In this example the public IP adress of the host machine is *89.145.162.32*
 
 ```
+EXTERNAL_IP=89.145.162.32
+cat <<EOF | k apply -f -
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -80,7 +82,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: ghost.89.145.162.67.nip.io
+  - host: ghost.$EXTERNAL_IP.nip.io
     http:
       paths:
       - path: /
@@ -90,6 +92,7 @@ spec:
             name: ghost
             port:
               number: 2368
+EOF
 ```
 
 7. Verify you can access the ghost web interface from the outside

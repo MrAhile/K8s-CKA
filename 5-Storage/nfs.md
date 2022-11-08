@@ -114,9 +114,10 @@ persistentvolume/pvc-ed1f9e73-285b-49f1-8ae8-c33d1ba96fee   100Mi      RWX      
 
 6. Create a pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
 
-The pod can have a specification like the following one:
+The pod can have a specification like the following one (change YOUR_FIRSTNAME with your real name):
 
 ```
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
@@ -136,6 +137,7 @@ spec:
   - name: share
     persistentVolumeClaim:
       claimName: share
+EOF
 ```
 
 7. Check the content of /tmp/share/index.html inside the pod's container
