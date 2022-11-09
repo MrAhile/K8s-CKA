@@ -1,6 +1,6 @@
 ## Exercise
 
-1. Create the specification of a pod named *www* with a single container based on nginx
+1. Create the specification of a Pod named *www* with a single container based on nginx
 
 2. Modify the specification so the nginx container persists its logs in an ephemeral storage 
 
@@ -10,12 +10,12 @@ Hint: nginx logs are located in */var/log/nginx/access.log* and */var/log/nginx/
 
 4. Run the pod and make sure both container are running fine
 
-5. Delete the pod
+5. Delete the Pod
 
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create the specification of a pod named *www* with a single container based on nginx
+1. Create the specification of a Pod named *www* with a single container based on nginx
 
 ```
 k run www --image=nginx:1.20 --dry-run=client -o yaml > pod.yaml
@@ -112,7 +112,7 @@ k logs www -c alpine
 
 This container correctly streams the nginx container's log
 
-5. Delete the pod
+5. Delete the Pod
 
 ```
 k delete -f pod.yaml

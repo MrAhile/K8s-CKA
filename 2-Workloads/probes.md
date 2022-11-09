@@ -1,12 +1,12 @@
 ## Exercise
 
-1. Create the specification of a pod based on the *stefanprodan/podinfo* image
+1. Create the specification of a Pod based on the *stefanprodan/podinfo* image
 
 2. Add a liveness probe checking the /healthz on port 9898 every 10 seconds after an initial delay of 30 seconds
 
 3. Add a readiness probe checking the /readyz on port 9898 every 5 seconds after an initial delay of 30 seconds
 
-4. Delete the pod
+4. Delete the Pod
 
 ## Documentation
 
@@ -15,7 +15,7 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create the specification of a pod based on the *stefanprodan/podinfo* image
+1. Create the specification of a Pod based on the *stefanprodan/podinfo* image
 
 ```
 kubectl run podinfo --image=stefanprodan/podinfo --dry-run=client -o yaml > podinfo.yaml
@@ -69,7 +69,7 @@ spec:
       initialDelaySeconds: 30
 ```
 
-4. Delete the pod
+4. Delete the Pod
 
 ```
 k delete po podinfo

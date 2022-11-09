@@ -1,12 +1,12 @@
 ## Exercise
 
-1. Create the specification of a pod named *www* with one container based on *nginx:1.20-alpine*
+1. Create the specification of a Pod named *www* with one container based on *nginx:1.20-alpine*
 
-2. Add a container based on the image *httpd:2.4* and run the pod
+2. Add a container based on the image *httpd:2.4* and run the Pod
 
-3. Why this pod will not reach the *Running* status ?
+3. Why this Pod will not reach the *Running* status ?
 
-4. Delete the pod
+4. Delete the Pod
 
 ## Documentation
 
@@ -15,13 +15,13 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create the specification of a pod with one container based on *nginx:1.20-alpine*
+1. Create the specification of a Pod with one container based on *nginx:1.20-alpine*
 
 ```
 k run www --image=nginx:1.20-alpine --dry-run=client -o yaml > pod.yaml
 ```
 
-2. Add a container based on the image *httpd:2.4* and run the pod
+2. Add a container based on the image *httpd:2.4* and run the Pod
 
 Adding a second container in the list:
 
@@ -40,13 +40,13 @@ spec:
     name: apache
 ```
 
-Creation of the pod
+Creation of the Pod
 
 ```
 k apply -f pod.yaml
 ```
 
-Get the status of the pod
+Get the status of the Pod
 
 ```
 k get po -l run=www
@@ -54,7 +54,7 @@ NAME   READY   STATUS             RESTARTS     AGE
 www    1/2     CrashLoopBackOff   1 (5s ago)   11s
 ```
 
-3. Why this pod will not reach the *Running* status ?
+3. Why this Pod will not reach the *Running* status ?
 
 Containers of a same pod cannot listen on the same port (80 in this exemple)
 
@@ -91,7 +91,7 @@ no listening sockets available, shutting down
 AH00015: Unable to open logs
 ```
 
-4. Delete the pod
+4. Delete the Pod
 
 ```
 k delete po/www

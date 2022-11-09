@@ -1,6 +1,9 @@
 ## Exercise
 
-1. Create the specification of a DaemonSet named *log*. Each pod must be based on the alpine:3.15 image they must be configured to read the log files located in */var/log/pods* on the node and stream them on their stdout
+1. Create the specification of a DaemonSet named *log*. Each pod must:
+- be based on the alpine:3.15 image
+- read the log files located in */var/log/pods* on the node it is running on
+- stream the log on its standard output
 
 Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 
@@ -19,7 +22,10 @@ Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create the specification of a DaemonSet named *log*. Each pod must be based on the alpine:3.15 image they must be configured to read the log files located in */var/log/pods* on the node and stream them on their stdout
+1. Create the specification of a DaemonSet named *log*. Each pod must:
+- be based on the alpine:3.15 image
+- read the log files located in */var/log/pods* on the node it is running on
+- stream the log on its standard output
 
 As it is not possible to create a DaemonSet directly with kubectl, we start by creating a Deployment
 
@@ -160,14 +166,14 @@ log-2tzzd   1/1     Running       0          17s   10.38.0.3   worker2   <none> 
 log-smtmn   1/1     Running       0          17s   10.32.0.4   worker1   <none>           <none>
 ```
 
-This is due to the master's taint that the pod does not tolerate. The command below shows the key and effect of that taint:
+This is due to the master's taint that the pod does not tolerate. The command below shows the key and effect of that taint (you might need to install jq if it's not already on your machine):
 
 ```
 k get no master -o jsonpath={.spec.taints} | jq
 [
   {
     "effect": "NoSchedule",
-    "key": "node-role.kubernetes.io/master"
+    "key": "node-role.kubernetes.io/control-plane"
   }
 ]
 ```
@@ -193,7 +199,7 @@ spec:
         app: log
     spec:
       tolerations:
-      - key: node-role.kubernetes.io/master
+      - key: node-role.kubernetes.io/control-plane
         effect: NoSchedule
       containers:
       - image: alpine:3.15

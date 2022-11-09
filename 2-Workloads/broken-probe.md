@@ -62,7 +62,7 @@ NAME                     READY   STATUS             RESTARTS      AGE
 nginx-65bbc7db4d-664xr   0/1     CrashLoopBackOff   6 (27s ago)   4m12s
 ```
 
-Describing the pod gives additional information indicating the liveness probe always fails:
+Describing the pod gives additional information which indicates the liveness probe keeps on failing:
 
 ```
 k describe po nginx-65bbc7db4d-664xr

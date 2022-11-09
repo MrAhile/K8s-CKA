@@ -1,6 +1,6 @@
 ## Exercise
 
-1. Create a ConfigMap named mycfg containing the key pairs *token=12345* and *level=debgu*
+1. Create a ConfigMap named mycfg containing the key pairs *token=12345* and *level=debug*
 
 2. Use the *jsonpath* output format to only get the content of the *data* key
 
@@ -21,7 +21,7 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create a ConfigMap named mycfg containing the key pairs *token=12345* and *level=debgu*
+1. Create a ConfigMap named mycfg containing the key pairs *token=12345* and *level=debug*
 
 ```
 k create configmap mycfg --from-literal=token=12345 --from-literal=level=debug

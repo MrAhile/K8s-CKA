@@ -10,7 +10,7 @@
 
 5. Where are the Pods scheduled ?
 
-6. Delete the deployment
+6. Delete the Deployment
 
 ## Documentation
 
@@ -106,7 +106,7 @@ nginx-7b788fb97d-rb74s   1/1     Running   0          57s   10.32.0.6   worker1 
 nginx-7b788fb97d-tj7f9   1/1     Running   0          57s   10.38.0.7   worker2   <none>           <none>
 ```
 
-6. Delete the deployment
+6. Delete the Deployment
 
 ```
 k delete deploy/nginx
