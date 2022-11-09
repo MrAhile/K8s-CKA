@@ -12,7 +12,7 @@ Note: first make sure you have the Helm client installed, then use the following
 
 4. Add a Load Balancer to expose the Ingress Controller
 
-Note: run the ```setup-ingress-proxy.sh``` script located in the $HOME directory of your host machine
+Note: run the ```setup-lb.sh``` script located in the $HOME directory of your host machine
 
 5. Create a pod named *ghost* based on the ghost:4 image and expose it with a ClusterIP service
 
@@ -57,7 +57,7 @@ This service cannot get an external IP address as the cluster is not managed by 
 The following command runs a HAProxy container on the host machine:
 
 ```
-./setup-ingress-proxy.sh 
+./setup-lb.sh 
 ```
 
 This container acts as a load balancer in front of your worker nodes and exposes the Ingress Controller via ${YOUR_HOST_IP}.nip.io
