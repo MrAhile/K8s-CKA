@@ -4,7 +4,7 @@
 
 2. Where are the pods running ?
 
-3. Using a single command, make sure the deployment's pods are evicted from the worker2
+3. Using a single command, make sure the pods are evicted from worker2
 
 4. Delete the deployment and revert your changes back
 
@@ -36,7 +36,7 @@ www-644dfdf68b-lx2sp   1/1     Running   0          3s    10.32.0.5   worker1   
 www-644dfdf68b-mvsfv   1/1     Running   0          3s    10.32.0.4   worker1   <none>           <none>
 ```
 
-3. Using a single command, make sure the deployment's pods are evicted from the worker2
+3. Using a single command, make sure the pods are evicted from worker2
 
 Adding a taint with the *NoExecute* effect on a node will evict all the pods that do not tolerate that taint
 
