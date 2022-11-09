@@ -4,7 +4,7 @@
 
 2. Create a NetworkPolicy in the *dev* namespace to denies all ingress traffic for every Pod in this namespace
 
-3. Run 2 pods in the *dev* namespace and verify they cannot communicate with each other
+3. Run 2 Pods in the *dev* namespace and verify they cannot communicate with each other
 
 4. Create a NetworkPolicy in the *dev* namespace to allow the communication between all Pods in this namespace
 
@@ -40,7 +40,7 @@ spec:
 EOF
 ```
 
-3. Run 2 pods in the *dev* namespace and verify they cannot communicate with each other
+3. Run 2 Pods in the *dev* namespace and verify they cannot communicate with each other
 
 Creation of a nginx pod
 
@@ -54,10 +54,10 @@ Get pod's IP
 POD_IP=$(k get po nginx -n dev -o jsonpath={.status.podIP})
 ```
 
-Try to reach the nginx pod from another pod
+Try to reach the nginx Pod from another Pod
 
 ```
-k -n dev run --rm -ti debug --image=alpine:3.15 -- wget ${POD_IP}
+k -n dev run --rm -ti debug --image=alpine:3.15 -- wget -T 5 ${POD_IP}
 ...hanging...
 ```
 
@@ -88,7 +88,7 @@ EOF
 Checking that the debug pod can now reach the nginx one:
 
 ```
-k -n dev run --rm -ti debug --image=alpine:3.15 -- wget -qO- ${POD_IP}
+k -n dev run --rm -ti debug --image=alpine:3.15 -- wget -T 5 -q -O- ${POD_IP}
 If you don't see a command prompt, try pressing enter.
 <!DOCTYPE html>
 <html>
@@ -118,6 +118,8 @@ Commercial support is available at
 ```
 
 5. Delete the dev namespace
+
+This will delete the Pod and the NetworkPolicies as well:
 
 ```
 k delete ns/dev

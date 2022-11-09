@@ -41,7 +41,7 @@ sudo systemctl status kubelet
 
 3. Check the status of worker1
 
-From the list of node, worker1 should appear in NotReady
+From the list of node, worker1 should appear as NotReady
 
 ```
 k get no

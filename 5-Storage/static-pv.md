@@ -14,13 +14,13 @@ Hint: you can use the nodeAffinity property in the PersistentVolume specificatio
 
 6. Make sure the PVC if bound to the PV
 
-7. Create a pod named *www*, with a single nginx container based on nginx:1.20. Use the PersistentVolumeClaim as a volume and mount it in */usr/share/nginx/html*. Where is this pod scheduled ?
+7. Create a Pod named *www*, with a single nginx container based on nginx:1.20. Use the PersistentVolumeClaim as a volume and mount it in */usr/share/nginx/html*. Where is this Pod scheduled ?
 
 8. Create the file *index.html* containing the string *hello* in */tmp/data/* on worker1
 
 9. Send a request to the nginx container and make sure you get the content of the previous file
 
-10. Delete the pod, the pv and the pvc. Also remove the /tmp/data folder on worker1
+10. Delete the Pod, the PV and the PVC. Also remove the /tmp/data folder on worker1
 
 ## Documentation
 
@@ -122,15 +122,15 @@ NAME                  CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM 
 persistentvolume/pv   1Gi        RWO            Retain           Bound    default/pvc   manual                  49s
 ```
 
-7. Create a pod named *www*, with a single nginx container based on nginx:1.20. Use the PersistentVolumeClaim as a volume and mount it in */usr/share/nginx/html*. Where is this pod scheduled ?
+7. Create a Pod named *www*, with a single nginx container based on nginx:1.20. Use the PersistentVolumeClaim as a volume and mount it in */usr/share/nginx/html*. Where is this pod scheduled ?
 
-Create a pod specification
+Create a Pod specification
 
 ```
 k run www --image=nginx:1.20 --dry-run=client -o yaml > www.yaml
 ```
 
-Modification of the specification to define a volume and mount it
+Modification of the specification to define a volume and mount it into the container's filesystem:
 
 ```
 apiVersion: v1
@@ -152,13 +152,13 @@ spec:
       claimName: pvc
 ```
 
-Creation of the pod
+Creation of the Pod
 
 ```
 k apply -f www.yaml
 ```
 
-This pod is scheduled on worker1, the node linked to the PersisentVolume
+This Pod is scheduled on worker1, the node associated to the PersistentVolume
 
 ```
 k get po -o wide
@@ -181,7 +181,7 @@ k exec www -- curl -s localhost
 hello
 ```
 
-10. Delete the pod, the pv and the pvc. Also remove the /tmp/data folder on worker1
+10. Delete the Pod, the PV and the PVC. Also remove the /tmp/data folder on worker1
 
 ```
 k delete po www

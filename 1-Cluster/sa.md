@@ -3,7 +3,7 @@
 
 1. Create a Namespace named *test*
 
-2. Create a ServiceAccount named *sa* in the namespace *test*
+2. Create a ServiceAccount named *sa* in the Namespace *test*
 
 3. Create a ClusterRole *pod-reader* with the rights to get and list Pods
 

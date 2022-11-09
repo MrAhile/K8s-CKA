@@ -1,19 +1,19 @@
 ## Exercise
 
-1. Make sure user *thomas* can list the pods cluster wide
+1. Make sure user *thomas* can list the Pods cluster wide
 
-2. Make sure user *thomas* can create a port-forward on all the pods in the *dev* namespace 
+2. Make sure user *thomas* can create a port-forward on all the Pods in the *dev* Namespace 
 
-3. Make user user *thomas* can create, list, get, update, delete all the deployments in the *dev* namespace
+3. Make user user *thomas* can create, list, get, update, delete the Deployments in the *dev* Namespace
 
-4. Make sure user *patrick* can manager (all actions) the deployment named *www* in the *dev* namespace
+4. Make sure user *patrick* can manage (all actions) the Deployment named *www* in the *dev* Namespace
 
 5. Delete the Role / ClusterRole / RoleBinding / ClusterRoleBinding created
 
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Make sure user *thomas* can list the pods cluster wide
+1. Make sure user *thomas* can list the Pods cluster wide
 
 Create the ClusterRole:
 
@@ -34,7 +34,7 @@ k auth can-i list nodes --as thomas
 yes
 ```
 
-2. Make sure user *thomas* can create a port-forward on all the pods in the *dev* namespace 
+2. Make sure user *thomas* can create a port-forward on all the Pods in the *dev* Namespace 
 
 First create the *dev* namespace
 
@@ -61,7 +61,7 @@ k auth can-i create pods --subresource=forward --as thomas --namespace dev
 yes
 ```
 
-3. Make user user *thomas* can create, list, get, update, delete all the deployments in the *dev* namespace
+3. Make user user *thomas* can create, list, get, update, delete the Deployments in the *dev* Namespace
 
 
 Create the Role:
@@ -83,7 +83,7 @@ k auth can-i create deployments.apps --as thomas --namespace dev
 yes
 ```
 
-4. Make sure user *patrick* can manager (all actions) the deployment named *www* in the *dev* namespace
+4. Make sure user *patrick* can manage (all actions) the Deployment named *www* in the *dev* Namespace
 
 Create a role that allows to manage the deployment named *www*:
 

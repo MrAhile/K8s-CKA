@@ -1,23 +1,23 @@
 
 ## Exercise
 
-1. Create a pod with a single container based on *mongo:5.0* and make it persist its data in a volume linked to the pod's lifecycle
+1. Create a Pod with a single container based on *mongo:5.0* and ensure it persists its data in an ephemeral volume
 
 Hint: Mongo persists the data in it's */data/db* folder
 
 2. Run a shell in the container and list the content of the */data/db* folder
 
-3. Get the unique identifier of the pod
+3. Get the unique identifier of the Pod
 
-Hint: this can be retrieved in .metadata.uid
+Hint: this can be retrieved in the property *.metadata.uid*
 
-4. On which node is this pod running
+4. On which node is this Pod running
 
-5. Run a shell on the node this pod is running on and retreive the content of the emtpyDir volume
+5. Run a shell on the node this Pod is running on and retrieve the content of the volume
 
 Hint: it's located in */var/lib/kubelet/pods/POD_ID/volumes/kubernetes.io~empty-dir/data*
 
-6. Delete the pod
+6. Delete the Pod
 
 ## Documentation
 
@@ -26,7 +26,7 @@ Hint: it's located in */var/lib/kubelet/pods/POD_ID/volumes/kubernetes.io~empty-
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create a pod with a single container based on *mongo:5.0* and make it persist its data in a volume linked to the pod's lifecycle
+1. Create a Pod with a single container based on *mongo:5.0* and ensure it persists its data in an ephemeral volume
 
 ```
 kubectl run mongo --image=mongo:5.0 --dry-run=client -o yaml > pod.yaml
@@ -53,7 +53,7 @@ spec:
     emptyDir: {}
 ```
 
-Create the pod:
+Create the Pod:
 
 ```
 k apply -f pod.yaml
@@ -65,13 +65,13 @@ k apply -f pod.yaml
 k exec mongo -- ls /data/db
 ```
 
-3. Get the unique identifier of the pod
+3. Get the unique identifier of the Pod
 
 ```
 k get po mongo -o jsonpath={.metadata.uid}
 ```
 
-4. On which node is this pod running
+4. On which node is this Pod running
 
 You can get the information with:
 
@@ -79,15 +79,15 @@ You can get the information with:
 k get po mongo -o wide
 ```
 
-5. Run a shell on the node this pod is running on and retreive the content of the emtpyDir volume
+5. Run a shell on the node this Pod is running on and retrieve the content of the volume
 
-From the node the pod is running on, list the content of the following folder making sure to replace POD_ID with the unique identifier you get in question 3.
+Get the content of the following folder making sure to replace POD_ID with the unique identifier you get in question 3.
 
 ```
-/var/lib/kubelet/pods/POD_ID/volumes/kubernetes.io~empty-dir/data
+sudo ls /var/lib/kubelet/pods/POD_ID/volumes/kubernetes.io~empty-dir/data
 ```
 
-6. Delete the pod
+6. Delete the Pod
 
 ```
 k delete po mongo

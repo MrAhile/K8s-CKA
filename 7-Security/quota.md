@@ -1,16 +1,16 @@
 ## Exercise
 
-1. Create a namespace named *dev*
+1. Create a Namespace named *dev*
 
-2. Create a resource quota named *limit-pod-number* limiting the number of pods to 5 in that namespace
+2. Create a ResourceQuota named *limit-pod-number* limiting the number of pods to 5 in that Namespace
 
-3. Create a deployment named *ghost* with 10 replicas based on ghost:4 in the namespace *dev*
+3. Create a Deployment named *ghost* with 10 replicas based on ghost:4 in the Namespace *dev*
 
 4. What do you observe ?
 
-5. Get the events which show that some of the pods cannot be created
+5. Get the events which show that some of the Pods cannot be created
 
-6. Delete the deployment, the quota and the namespace
+6. Delete the Deployment, the ResourceQuota and the Namespace
 
 ## Documentation
 
@@ -19,19 +19,19 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create a namespace named *dev*
+1. Create a Namespace named *dev*
 
 ```
 k create ns dev
 ```
 
-2. Create a resource quota named *limit-pod-number* limiting the number of pods to 5 in that namespace
+2. Create a ResourceQuota named *limit-pod-number* limiting the number of Pods to 5 in that Namespace
 
 ```
 k -n dev create quota limit-pod-number --hard=pods=5
 ```
 
-3. Create a deployment named *ghost* with 10 replicas based on ghost:4 in the namespace *dev*
+3. Create a Deployment named *ghost* with 10 replicas based on ghost:4 in the Namespace *dev*
 
 ```
 k -n dev create deploy ghost --image=ghost:4 --replicas=10
@@ -65,7 +65,7 @@ To get only the one which indicate a creation failure we can add a filter on the
 k -n dev get events --field-selector reason=FailedCreate
 ```
 
-6. Delete the deployment, the quota and the namespace
+6. Delete the Deployment, the ResourceQuota and the Namespace
 
 ```
 k -n dev delete deploy/ghost quota/limit-pod-number 

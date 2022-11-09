@@ -1,17 +1,17 @@
 ## Exercise
 
-1. List the pods running the kubernetes dns
+1. List the Pods running the kubernetes dns
 
-2. Show the whole specification of the related deployment
+2. Show the whole specification of the related Deployment
 
-3. Which service account is used by the dns pods ?
+3. Which ServiceAccount is used by the dns Pods ?
 
-4. Which roles / cluster roles are associated to this service account ?
+4. Which Roles / ClusterRoles are associated to this ServiceAccount ?
 
 <details>
   <summary markdown="span">Solution</summary>
 
-1. List the pods running the kubernetes dns
+1. List the Pods running the kubernetes dns
 
 ```
 k -n kube-system get po -l k8s-app=kube-dns
@@ -20,28 +20,28 @@ coredns-78fcd69978-j5cl6   1/1     Running   0          160m
 coredns-78fcd69978-pmjl6   1/1     Running   0          160m
 ```
 
-2. Show the whole specification of the related deployment
+2. Show the whole specification of the related Deployment
 
 ```
 k -n kube-system get deploy/coredns -o yaml
 ```
 
-3. Which service account is used by the dns pods ?
+3. Which ServiceAccount is used by the dns Pods ?
 
 ```
 k -n kube-system get deploy/coredns -o jsonpath={.spec.template.spec.serviceAccountName}
 coredns
 ```
 
-4. Which roles / cluster roles are associated to this service account ?
+4. Which Roles / ClusterRoles are associated to this ServiceAccount ?
 
-There is no roles associated to the coredns service account:
+There is no Roles associated to the coredns ServiceAccount:
 
 ```
 k get rolebinding -o yaml -A | grep coredns
 ```
 
-There is one clusterrole associated to coredns:
+There is a ClusterRole associated to coredns:
 
 ```
 k get clusterrolebinding system:coredns -o yaml
@@ -62,7 +62,7 @@ subjects:
   namespace: kube-system
 ```
 
-The rules of this cluster role are the following ones:
+The rules of this ClusterRole are the following ones:
 
 ```
 k get clusterrole system:coredns -o yaml

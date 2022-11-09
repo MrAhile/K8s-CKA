@@ -163,7 +163,7 @@ From the subject information, we can get the Group and User which authenticates 
 Getting the ClusterRole with the same name as the Group (*system:node*):
 
 ```
-k get clusterrole system:node  -o yaml
+k get clusterrole system:node -o yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

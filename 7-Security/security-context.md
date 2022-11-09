@@ -1,6 +1,6 @@
 ## Exercise
 
-1. Create a pod named *secure* with a single container based on the *alpine:3.15* image running the command "sleep 3600" with the user ID 1000 and the group ID 1000
+1. Create a Pod named *secure* with a single container based on the *alpine:3.15* image running the command "sleep 3600" with the user ID 1000 and the group ID 1000
 
 2. Run a shell in the container verify the owner of the process
 
@@ -13,9 +13,10 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create a pod called secure with the alpine image. The container should run the command "sleep 3600" with the user ID 1000 and the group ID 1000
+1. Create a Pod named *secure* with a single container based on the *alpine:3.15* image running the command "sleep 3600" with the user ID 1000 and the group ID 1000
 
 ```
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
@@ -30,6 +31,7 @@ spec:
     securityContext:
       runAsUser: 1000
       runAsGroup: 1000
+EOF
 ```
 
 2. Run a shell in the container verify the process' owner

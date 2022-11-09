@@ -16,7 +16,7 @@ Installation instruction can be found at [https://github.com/kubernetes-sigs/nfs
 
 Warning: make sure to use the name of the server (*share.techwhale.io*) and the exported path (*/nfs-export*) when installing the provisioner 
 
-3. Make sure the provisoner is running fine and a StorageClass has been created
+3. Make sure the provisioner is running fine and a StorageClass has been created
 
 4. Create a PersistentVolumeClaim requesting 100Mi of storage and referencing this StorageClass
 
@@ -24,13 +24,13 @@ Note: you can specify the *ReadWriteMany* accessMode
 
 5. Make sure a PersistentVolume has been created and it is bound to the PVC
 
-6. Create a pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
+6. Create a Pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the Pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
 
 Note: the container can use a command similar to "while true; do echo hello from YOUR_FIRSTNAME at $(date) >> /tmp/share/index.html; sleep 100000; done". Make sure to replace *YOUR_FIRSTNAME* with your firstname :)
 
-7. Check the content of /tmp/share/index.html inside the pod's container
+7. Check the content of /tmp/share/index.html inside the Pod's container
 
-8. Delete the pod, the pvc and uninstall the NFS provisioner.
+8. Delete the Pod, the PVC and uninstall the NFS provisioner.
 
 ## Documentation
 
@@ -63,7 +63,7 @@ Install the NFS provisioner providing the path towards the NFS server and the na
 helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server=share.techwhale.io --set nfs.path=/nfs-export
 ```
 
-3. Make sure the provisoner is running fine and a StorageClass has been created
+3. Make sure the provisioner is running fine and a StorageClass has been created
 
 Making sure the provisioner is running fine:
 
@@ -112,9 +112,9 @@ NAME                                                        CAPACITY   ACCESS MO
 persistentvolume/pvc-ed1f9e73-285b-49f1-8ae8-c33d1ba96fee   100Mi      RWX            Delete           Bound      default/share   nfs-client              4s
 ```
 
-6. Create a pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
+6. Create a Pod based on alpine:3.15 which mount the content of the PV in /tmp/share. Make sure the pod writes your firstname and the date in /tmp/share/index.html every couple of minutes
 
-The pod can have a specification like the following one (change YOUR_FIRSTNAME with your real name):
+The Pod can have a specification like the following one (change YOUR_FIRSTNAME with your real name):
 
 ```
 cat <<EOF | kubectl apply -f -
@@ -140,16 +140,16 @@ spec:
 EOF
 ```
 
-7. Check the content of /tmp/share/index.html inside the pod's container
+7. Check the content of /tmp/share/index.html inside the Pod's container
 
 ```
 k exec -ti hello -- cat /tmp/share/index.html
 hello from YOUR_FIRSTNAME at Fri Apr 1 13:54:34 UTC 2022
 ```
 
-8. Delete the pod, the pvc and uninstall the NFS provisioner.
+8. Delete the Pod, the PVC and uninstall the NFS provisioner.
 
-Deletion of the pod and the pvc
+Deletion of the Pod and the PVC
 
 ```
 k delete po/hello pvc/share
