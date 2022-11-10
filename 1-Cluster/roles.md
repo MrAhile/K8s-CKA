@@ -4,33 +4,33 @@
 
 2. Make sure user *thomas* can create a port-forward on all the Pods in the *dev* Namespace 
 
-3. Make user user *thomas* can create, list, get, update, delete the Deployments in the *dev* Namespace
+3. Make sure user *thomas* can create, list, get, update, delete the Deployments in the *dev* Namespace
 
 4. Make sure user *patrick* can manage (all actions) the Deployment named *www* in the *dev* Namespace
 
-5. Delete the Role / ClusterRole / RoleBinding / ClusterRoleBinding created
+5. Delete the Role / ClusterRole / RoleBinding / ClusterRoleBinding created as well as the *dev* Namespace.
 
 <details>
   <summary markdown="span">Solution</summary>
 
 1. Make sure user *thomas* can list the Pods cluster wide
 
-Create the ClusterRole:
+Start by creating a ClusterRole allowing to list the Pods in the entire cluster:
 
 ```
-k create clusterrole list-nodes --verb list --resource nodes 
+k create clusterrole list-pods --verb list --resource pods 
 ```
 
 Associate the *ClusterRole* to *thomas* via a *ClusterRoleBinding*
 
 ```
-k create clusterrolebinding thomas-list-nodes --clusterrole list-nodes --user thomas
+k create clusterrolebinding thomas-list-pods --clusterrole list-pods --user thomas
 ```
 
 Verify:
 
 ```
-k auth can-i list nodes --as thomas
+k auth can-i list pods --as thomas
 yes
 ```
 
@@ -62,7 +62,6 @@ yes
 ```
 
 3. Make user user *thomas* can create, list, get, update, delete the Deployments in the *dev* Namespace
-
 
 Create the Role:
 
@@ -104,13 +103,14 @@ k auth can-i "*" deploy/www --as patrick -n dev
 yes
 ```
 
-5. Delete the Role / ClusterRole / RoleBinding / ClusterRoleBinding created
+5. Delete the Role / ClusterRole / RoleBinding / ClusterRoleBinding created as well as the *dev* namespace.
 
 ```
 k delete rolebinding patrick-manage-www-deployment thomas-manage-deployment thomas-port-forward
 k delete role manage-www-deployment manage-deployment port-forward 
 k delete clusterrolebinding thomas-list-nodes
 k delete clusterrole list-nodes
+k delete ns dev
 ```
 
 </details>

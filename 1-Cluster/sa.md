@@ -9,7 +9,7 @@
 
 4. Associate the *pod-reader* ClusterRole to the *sa* ServiceAccount
 
-5. Verify the *sa* ServiceAccount can get and list Pods
+5. Verify the *sa* ServiceAccount can get and list Pods in the Namespace *test*
 
 6. Delete the resources created above
 
@@ -40,7 +40,7 @@ k create clusterrole pod-reader --verb=get,list --resource=pods
 k create rolebinding test-pod-reader --clusterrole=pod-reader --serviceaccount=test:sa -n test
 ```
 
-5. Verify the *sa* ServiceAccount can get and list Pods
+5. Verify the *sa* ServiceAccount can get and list Pods in the Namespace *test*
 
 ```
 k auth can-i list pods --as system:serviceaccount:test:sa -n test
