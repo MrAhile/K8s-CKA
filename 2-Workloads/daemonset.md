@@ -1,17 +1,17 @@
 ## Exercise
 
-1. Create the specification of a DaemonSet named *log*. Each pod must:
+1. Create the specification of a DaemonSet named *log*. Each Pod must:
 - be based on the alpine:3.15 image
 - read the log files located in */var/log/pods* on the node it is running on
 - stream the log on its standard output
 
 Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 
-2. Create the DaemonSet. Where are the pods scheduled ? 
+2. Create the DaemonSet. Where are the Pods scheduled ? 
 
-3. Change the specification so there is a pod on each node of the cluster
+3. Change the specification so there is a Pod on each node of the cluster
 
-4. Verify the pod can stream the node's log
+4. Verify the Pod can stream the node's log
 
 5. Delete the DaemonSet
 
@@ -22,7 +22,7 @@ Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Create the specification of a DaemonSet named *log*. Each pod must:
+1. Create the specification of a DaemonSet named *log*. Each Pod must:
 - be based on the alpine:3.15 image
 - read the log files located in */var/log/pods* on the node it is running on
 - stream the log on its standard output
@@ -150,7 +150,7 @@ spec:
           path: /var/log/pods
 ```
 
-2. Create the DaemonSet. Where are the pods scheduled ? 
+2. Create the DaemonSet. Where are the Pods scheduled ? 
 
 Creation of the DaemonSet
 
@@ -158,7 +158,7 @@ Creation of the DaemonSet
 k apply -f spec.yaml
 ```
 
-Listing the pods, we can see no pod is running on the master:
+Listing the Pods, we can see there is no Pod on the master:
 
 ```
 k get po -o wide
@@ -166,7 +166,7 @@ log-2tzzd   1/1     Running       0          17s   10.38.0.3   worker2   <none> 
 log-smtmn   1/1     Running       0          17s   10.32.0.4   worker1   <none>           <none>
 ```
 
-This is due to the master's taint that the pod does not tolerate. The command below shows the key and effect of that taint (you might need to install jq if it's not already on your machine):
+This is due to the master's taint that the Pod does not tolerate. The command below shows the key and effect of that taint (you might need to install jq if it's not already on your machine):
 
 ```
 k get no master -o jsonpath={.spec.taints} | jq
@@ -174,13 +174,17 @@ k get no master -o jsonpath={.spec.taints} | jq
   {
     "effect": "NoSchedule",
     "key": "node-role.kubernetes.io/control-plane"
+  },
+  {
+    "effect": "NoSchedule",
+    "key": "node-role.kubernetes.io/master"
   }
 ]
 ```
 
-3. Change the specification so there is a pod on each node of the cluster
+3. Change the specification so there is a Pod on each node of the cluster
 
-We add the toleration so a pod of the DaemonSet can also be scheduled on the master node:
+We add the toleration so a Pod of the DaemonSet can also be scheduled on the master node:
 
 ```
 apiVersion: apps/v1
@@ -200,6 +204,8 @@ spec:
     spec:
       tolerations:
       - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
         effect: NoSchedule
       containers:
       - image: alpine:3.15
@@ -223,7 +229,7 @@ Applying the new specification
 k apply -f spec.yaml
 ```
 
-There is now one pod per node:
+There is now one Pod per node:
 
 ```
 k get po -o wide
@@ -232,15 +238,15 @@ log-676qv   1/1     Running   0          37s   10.32.0.3   worker1   <none>     
 log-m8q56   1/1     Running   0          5s    10.38.0.3   worker2   <none>           <none>
 ```
 
-4. Verify the pod can stream the node's log
+4. Verify the Pod can stream the node's log
 
-Get the log of one of the DaemonSet pod:
+Get the log of one of the DaemonSet's Pod:
 
 ```
 k logs 2l2zz
 ```
 
-Or the logs of all DaemonSet pods at once
+Or the logs of all DaemonSet Pods at once
 
 ```
 k logs ds/log
