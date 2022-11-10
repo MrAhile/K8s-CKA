@@ -25,10 +25,10 @@ Only the master node as a Taint, this one prevents the application Pod from bein
 
 ```
 k get nodes master -o jsonpath={.spec.taints}
-[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}]
+[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}, {"effect":"NoSchedule","key":"node-role.kubernetes.io/control-plane"}]
 ```
 
-The NoSchedule taint prevent Pods which do not tolerate the taint to be scheduled on that node
+The NoSchedule taints prevent Pods which do not tolerate the taints to be scheduled on that node
 
 2. Create the specification of a Deployment named *nginx* with 6 replicas of Pods based on the nginx:1.20 image, then create the Deployment.
 
@@ -57,9 +57,9 @@ nginx-6d777db949-tfbjb   1/1     Running   0          8s    10.32.0.2   worker1 
 nginx-6d777db949-vs6wl   1/1     Running   0          8s    10.38.0.1   worker2   <none>           <none>
 ```
 
-The Pods are deployed either on worker1 or on worker2. None are deployed on the master node because of the NoSchedule taint that the Pods do not tolerate.
+The Pods are deployed either on worker1 or on worker2. None are deployed on the master node because of the NoSchedule taints that the Pods do not tolerate.
 
-4. Change the specification of the Deployment so the Pods tolerate the taint present on the master node. Update the Deployment resource.
+4. Change the specification of the Deployment so the Pods tolerate the taints present on the master node. Update the Deployment resource.
 
 ```
 apiVersion: apps/v1
@@ -84,6 +84,8 @@ spec:
       tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
 ```
 
 Update the resource:
@@ -94,7 +96,7 @@ k apply -f deploy.yaml
 
 5. Where are the Pods scheduled ?
 
-Due to the toleration of the taint, Pods can now be scheduled on master as well
+Due to the toleration of the taints, the Pods can now be scheduled on the master node as well
 
 ```
 NAME                     READY   STATUS    RESTARTS   AGE   IP          NODE      NOMINATED NODE   READINESS GATES
