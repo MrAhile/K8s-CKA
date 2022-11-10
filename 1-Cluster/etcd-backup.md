@@ -40,9 +40,9 @@ Next create an etcd backup, this generates the file *snapshot.db* in the current
 ```
 sudo ETCDCTL_API=3 etcdctl snapshot save \
 --endpoints localhost:2379 \
---cacert /etc/kubernetes/pki/etcd/server.crt \
---cert /etc/kubernetes/pki/etcd/ca.crt \
---key /etc/kubernetes/pki/etcd/ca.key \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
 snapshot.db
 ```
 
@@ -91,9 +91,9 @@ Then restore the backup in the */var/lib/etcd-snapshot* folder (this one will be
 ```
 sudo ETCDCTL_API=3 etcdctl snapshot restore \
 --endpoints localhost:2379 \
---cacert /etc/kubernetes/pki/etcd/server.crt \
---cert /etc/kubernetes/pki/etcd/ca.crt \
---key /etc/kubernetes/pki/etcd/ca.key \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
 --data-dir /var/lib/etcd-snapshot \
 snapshot.db
 ```
