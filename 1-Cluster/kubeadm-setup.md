@@ -28,19 +28,19 @@ First, using the following commands, install the dependencies (the container run
 - from a shell on the master node:
 
 ```
-curl https://luc.run/kubeadm/master.sh | VERSION=1.24.7 sh
+curl https://luc.run/kubeadm/master.sh | VERSION=1.25.7 sh
 ```
 
 - from a shell on worker1:
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.24.7 sh
+curl https://luc.run/kubeadm/worker.sh | VERSION=1.25.7 sh
 ```
 
 - from a shell on worker2
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.24.7 sh
+curl https://luc.run/kubeadm/worker.sh | VERSION=1.25.7 sh
 ```
 
 3. Initialisation of the cluster
@@ -74,27 +74,31 @@ When this is done, go back to the master node and list the cluster's nodes. You 
 ```
 kubectl get no
 NAME      STATUS     ROLES                  AGE     VERSION
-master    NotReady   control-plane,master   7m7s    v1.24.7
-worker1   NotReady   <none>                 4m54s   v1.24.7
-worker2   NotReady   <none>                 4m14s   v1.24.7
+master    NotReady   control-plane,master   7m7s    v1.25.7
+worker1   NotReady   <none>                 4m54s   v1.25.7
+worker2   NotReady   <none>                 4m14s   v1.25.7
 ```
 
 5. Network plugin
 
-The above result shows the cluster is not ready yet, we need to install a network plugin first. In this example we will install WeaveNet but another network plugin could be installed instead.
+The above result shows the cluster is not ready yet, we need to install a network plugin first. In this example we will install Cilium but another network plugin could be installed instead.
 
 ```
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml
+OS="$(uname | tr '[:upper:]' '[:lower:]')"
+ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-$OS-$ARCH.tar.gz{,.sha256sum}
+sudo tar xzvfC cilium-$OS-$ARCH.tar.gz /usr/local/bin
+cilium install
 ```
 
 After a few tens of seconds the cluster will be ready:
 
 ```
-kubectl get no
+$ kubectl get no
 NAME      STATUS   ROLES                  AGE     VERSION
-master    Ready    control-plane,master   10m     v1.24.7
-worker1   Ready    <none>                 8m22s   v1.24.7
-worker2   Ready    <none>                 7m42s   v1.24.7
+master    Ready    control-plane,master   10m     v1.25.7
+worker1   Ready    <none>                 8m22s   v1.25.7
+worker2   Ready    <none>                 7m42s   v1.25.7
 ```
 
 6. Get kubeconfig on the host machine
@@ -112,9 +116,9 @@ cp kubeconfig.cfg $HOME/.kube/config
 You can now communicate with the cluster from the host machine directly (without sshing on the master node anymore)
 
 ```
-kubectl get no
+$ kubectl get no
 NAME      STATUS   ROLES                  AGE   VERSION
-master    Ready    control-plane,master   13m   v1.24.7
-worker1   Ready    <none>                 10m   v1.24.7
-worker2   Ready    <none>                 10m   v1.24.7
+master    Ready    control-plane,master   13m   v1.25.7
+worker1   Ready    <none>                 10m   v1.25.7
+worker2   Ready    <none>                 10m   v1.25.7
 ```
