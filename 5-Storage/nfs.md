@@ -1,4 +1,4 @@
-:warning: This exercise requires a specific configuration and cannot be performed outside of supervised training.
+:warning: This exercise requires a specific configuration and cannot be performed outside of a supervised training.
 
 ## Exercise
 
