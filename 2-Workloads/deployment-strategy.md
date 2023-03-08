@@ -77,7 +77,7 @@ Observe how the pods are replaced:
 k get po -l app=nginx -w
 ```
 
-You should notice the pods are replaced one after the other following a rolling update strategy (default one)
+You should notice the pods are replaced one after the other following a rolling update strategy (default strategy)
 
 4. Change the deployment strategy to *Recreate* and update the resource
 
