@@ -7,14 +7,14 @@ Note: in this example, we use [Multipass](https://mutlipass.run) a great tool fr
 - creation of the master VM
 
 ```
-multipass launch -n master -c 2 -m 2G -d 10G
+multipass launch -n master -c 2 -m 2G -d 15G
 ```
 
 - creation of worker1 and worker2 VMs
 
 ```
-multipass launch -n worker1 -c 2 -m 2G -d 10G
-multipass launch -n worker2 -c 2 -m 2G -d 10G
+multipass launch -n worker1 -c 2 -m 2G -d 15G
+multipass launch -n worker2 -c 2 -m 2G -d 15G
 ```
 
 Note: by default Multipass create a VM with 1G Ram, 1 CPU and 5G Disk 
