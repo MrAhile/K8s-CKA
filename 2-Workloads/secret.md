@@ -60,8 +60,8 @@ spec:
   - image: alpine
     name: alpine
     command:
-    - sleep
-    - 3600
+    - "sleep"
+    - "3600"
     volumeMounts:
     - name: creds
       mountPath: /secrets/credentials
