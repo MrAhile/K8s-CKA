@@ -67,7 +67,7 @@ sudo cat /etc/kubernetes/admin.conf > $HOME/.kube/config
 
 4. Add worker nodes
 
-Run the above command on worker1 and worker2 to add these nodes to the cluster.
+Run the "sudo kubeadm join..." command (the one you got in the previous step) on worker1 and worker2 to add these nodes to the cluster.
 
 Note: if you lost the join command you can generate a new one using: ```sudo kubeadm token create --print-join-command```
 
