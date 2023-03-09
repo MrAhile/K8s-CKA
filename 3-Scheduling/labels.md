@@ -59,7 +59,7 @@ k apply -f pod.yaml
 Verify this Pod has been scheduled on worker1
 
 ```
-k get po -l run=nginx
+k get po -l run=nginx -o wide
 NAME    READY   STATUS    RESTARTS   AGE   IP          NODE      NOMINATED NODE   READINESS GATES
 nginx   1/1     Running   0          53s   10.32.0.2   worker1   <none>           <none>
 ```
