@@ -57,7 +57,7 @@ POD_IP=$(k get po nginx -n dev -o jsonpath={.status.podIP})
 Try to reach the nginx Pod from another Pod
 
 ```
-k -n dev run --rm -ti debug --image=alpine:3.15 -- wget -T 5 ${POD_IP}
+k -n dev run --rm -ti debug --image=alpine:3.15 --restart=Never -- wget -T 5 ${POD_IP}
 ...hanging...
 ```
 
@@ -88,7 +88,7 @@ EOF
 Checking that the debug pod can now reach the nginx one:
 
 ```
-k -n dev run --rm -ti debug --image=alpine:3.15 -- wget -T 5 -q -O- ${POD_IP}
+k -n dev run --rm -ti debug --image=alpine:3.15 --restart=Never -- wget -T 5 -q -O- ${POD_IP}
 If you don't see a command prompt, try pressing enter.
 <!DOCTYPE html>
 <html>
