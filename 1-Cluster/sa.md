@@ -13,6 +13,11 @@
 
 6. Delete the resources created above
 
+## Documentation
+
+- [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [https://kubernetes.io/docs/concepts/security/service-accounts/](https://kubernetes.io/docs/concepts/security/service-accounts/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
