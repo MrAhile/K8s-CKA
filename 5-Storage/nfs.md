@@ -8,7 +8,7 @@ Note: this is a temporary file server widly opened
 
 1. Verify the NFS server is reachable from your worker nodes
 
-Note: you can use the command `showmount -e share.techwhale.io`
+Note: you can use the command `showmount -e share.techwhale.io` from a shell in each of your worker node
 
 2. Install the NFS Provisioner with Helm
 
