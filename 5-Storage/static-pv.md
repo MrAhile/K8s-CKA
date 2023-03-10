@@ -12,7 +12,7 @@ Hint: you can use the nodeAffinity property in the PersistentVolume specificatio
 
 5. Create a PersistentVolumeClaim with accessMode *ReadWriteOnce* accessMode, a storage capacity of 500Mi and the storage class *manual*
 
-6. Make sure the PVC if bound to the PV
+6. Make sure the PVC is bound to the PV
 
 7. Create a Pod named *www*, with a single nginx container based on nginx:1.20. Use the PersistentVolumeClaim as a volume and mount it in */usr/share/nginx/html*. Where is this Pod scheduled ?
 
@@ -109,7 +109,7 @@ spec:
 EOF
 ```
 
-6. Make sure the PVC if bound to the PV
+6. Make sure the PVC is bound to the PV
 
 Because the characteristics needed by the PersistentVolumeClaim match the ones offered by the PersistentVolume, the PVC is bound to the PV
 
