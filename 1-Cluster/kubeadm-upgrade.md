@@ -1,13 +1,15 @@
 ## Exercise
 
+In this exercice we will show how to upgrade a cluster from kubernetes 1.27.5 to 1.28.2. Please make sure to adapt the content if you have a different version of Kubernetes.
+
 1. Check the version of your cluster
 
 ```
 $ kubectl get no
 NAME            STATUS   ROLES           AGE   VERSION
-controlplane    Ready    control-plane   32m   v1.25.7
-worker1         Ready    <none>          23m   v1.25.7
-worker2         Ready    <none>          18m   v1.25.7
+controlplane    Ready    control-plane   32m   v1.27.5
+worker1         Ready    <none>          23m   v1.27.5
+worker2         Ready    <none>          18m   v1.27.5
 ```
 
 Note: in this exercise, we consider a 3 nodes kubeadm cluster (1 controlplane and 2 worker nodes), you'll need to adapt the procedure a little bit if your cluster has a different composition
@@ -20,12 +22,12 @@ Run a shell on the controlplane node and check the latest version of kubeadm
 sudo apt update && sudo apt-cache policy kubeadm
 ```
 
-You will be returned the newly Kubernetes versions. Use the latest version in the 1.26 familly, we will use 1.26.4 in this exercise.
+You will be returned the newly Kubernetes versions. In this exercise we will upgrade the 1.27.5 cluster to 1.28.2.
 
 First upgrade kubeadm to the new version:
 
 ```
-VERSION=1.26.4-00
+VERSION=1.28.2-00
 sudo apt-mark unhold kubeadm && \
 sudo apt-get update && \
 sudo apt-get install -y kubeadm=$VERSION && \
@@ -47,7 +49,7 @@ sudo kubeadm upgrade plan
 If the previous command went fine we can run the upgrade
 
 ```
-sudo kubeadm upgrade apply v1.26.4
+sudo kubeadm upgrade apply v1.28.2
 ```
 
 Next uncordon the controlplane node, making it "schedulable" again
@@ -59,7 +61,7 @@ kubectl uncordon controlplane
 Then upgrade kubelet and kubectl:
 
 ```
-VERSION=1.26.4-00
+VERSION=1.28.2-00
 sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && \
 sudo apt-get install -y kubelet=$VERSION kubectl=$VERSION && \
@@ -72,9 +74,9 @@ If we check the node versions, we can see the controlplane node has been upgrade
 ```
 $ kubectl get no
 NAME            STATUS   ROLES           AGE    VERSION
-controlplane    Ready    control-plane   35m    v1.26.4
-worker1         Ready    <none>          26m    v1.25.7
-worker2         Ready    <none>          21m    v1.25.7
+controlplane    Ready    control-plane   35m    v1.28.2
+worker1         Ready    <none>          26m    v1.27.5
+worker2         Ready    <none>          21m    v1.27.5
 ```
 
 Note: if the cluster has several controlplane nodes they need to be upgraded next. The upgrade command would be slightly different and would look like ```kubeadm upgrade NODE_IDENTIFIER```
@@ -86,7 +88,7 @@ Note: this procedure shows the upgrade of worker1, the same steps must be done f
 First run a shell on worker1 and upgrade the kubeadm binary:
 
 ```
-VERSION=1.26.4-00
+VERSION=1.28.2-00
 sudo apt-mark unhold kubeadm && \
 sudo apt-get update && \
 sudo apt-get install -y kubeadm=$VERSION && \
@@ -108,7 +110,7 @@ sudo kubeadm upgrade node
 Then upgrade kubelet and kubectl:
 
 ```
-VERSION=1.26.4-00
+VERSION=1.28.2-00
 sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && \
 sudo apt-get install -y kubelet=$VERSION kubectl=$VERSION && \
@@ -127,9 +129,9 @@ If we check the node versions, we can see the controlplane node and the worker1 
 ```
 $ kubectl get no
 NAME            STATUS   ROLES           AGE    VERSION
-controlplane    Ready    control-plane   36m    v1.26.4
-worker1         Ready    <none>          27m    v1.26.4
-worker2         Ready    <none>          22m    v1.25.7
+controlplane    Ready    control-plane   36m    v1.28.2
+worker1         Ready    <none>          27m    v1.28.2
+worker2         Ready    <none>          22m    v1.27.5
 ```
 
 4. Accessing the upgraded cluster
@@ -139,7 +141,7 @@ After the above steps are done on the other worker node, the cluster will be ful
 ```
 $ kubectl get no
 NAME            STATUS   ROLES           AGE    VERSION
-controlplane    Ready    control-plane   38m    v1.26.4
-worker1         Ready    <none>          29m    v1.26.4
-worker2         Ready    <none>          24m    v1.26.2
+controlplane    Ready    control-plane   38m    v1.28.2
+worker1         Ready    <none>          29m    v1.28.2
+worker2         Ready    <none>          24m    v1.28.2
 ```
