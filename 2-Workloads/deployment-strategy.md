@@ -6,7 +6,7 @@
 
 3. Change the specification so the image is nginx:1.18. Update the resource and observe how the pods are updated.
 
-4. Change the deployment strategy to *recreate* and update the resource
+4. Change the deployment strategy to *Recreate* and update the resource
 
 5. Change the specification so the image is nginx:1.20. Update the resource and observe how the pods are updated.
 
@@ -98,7 +98,7 @@ metadata:
   name: nginx
 spec:
   strategy:
-    type: recreate
+    type: Recreate
   replicas: 5
   selector:
     matchLabels:
@@ -130,7 +130,7 @@ metadata:
   name: nginx
 spec:
   strategy:
-    type: recreate
+    type: Recreate
   replicas: 5
   selector:
     matchLabels:
@@ -163,7 +163,7 @@ nginx-6d777db949-qs6k8   1/1     Running   0          10s
 nginx-6d777db949-s9zgx   1/1     Running   0          10s
 ```
 
-You should notice all the pods are terminated at the same time and new ones are created. This is the behavior of the *recreate* strategy.
+You should notice all the pods are terminated at the same time and new ones are created. This is the behavior of the *Recreate* strategy.
 
 6. Delete the deployment
 
