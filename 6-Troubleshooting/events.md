@@ -10,7 +10,7 @@
 1. List all the events in the cluster
 
 ```
-k get events
+k get events -A
 ```
 
 2. List the same events sorted by timestamp
