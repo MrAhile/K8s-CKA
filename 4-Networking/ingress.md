@@ -40,10 +40,7 @@ helm install ingress ingress-nginx/ingress-nginx --version 4.8.4
 The ingress controller is exposed with a LoadBalancer type service
 
 ```
-k -n ingress-nginx get svc
-NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-ingress-nginx-controller             LoadBalancer   10.96.133.38     <pending>     80:30933/TCP,443:30753/TCP   44s
-ingress-nginx-controller-admission   ClusterIP      10.108.148.107   <none>        443/TCP                      44s
+k get svc ingress-ingress-nginx-controller
 ```
 
 This service cannot get an external IP address as the cluster is not managed by a cloud provider.
