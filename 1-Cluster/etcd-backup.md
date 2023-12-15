@@ -2,7 +2,7 @@
 
 1. Check API Server to etcd communication
 
-From the master node, check the status of etcd
+From the controlplane node, check the status of etcd
 
 ```
 sudo ETCDCTL_API=3 etcdctl \
@@ -19,7 +19,7 @@ You should get a result similar to:
 localhost:2379 is healthy: successfully committed proposal: took = 14.891442ms
 ```
 
-Note: this demo cluster only uses one etcd instance. In a production cluster at least 3 etcd instances are required, these ones could run on the master nodes (stacked etcd) or on external hosts (external etcd)
+Note: this demo cluster only uses one etcd instance. In a production cluster at least 3 etcd instances are required, these ones could run on the controlplane nodes (stacked etcd) or on external hosts (external etcd)
 
 2. Backup etcd
 
@@ -128,12 +128,12 @@ spec:
     - --client-cert-auth=true
     - --data-dir=/var/lib/etcd
     - --initial-advertise-peer-urls=https://10.214.56.82:2380
-    - --initial-cluster=master=https://10.214.56.82:2380
+    - --initial-cluster=controlplane=https://10.214.56.82:2380
     - --key-file=/etc/kubernetes/pki/etcd/server.key
     - --listen-client-urls=https://127.0.0.1:2379,https://10.214.56.82:2379
     - --listen-metrics-urls=http://127.0.0.1:2381
     - --listen-peer-urls=https://10.214.56.82:2380
-    - --name=master
+    - --name=controlplane
     - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
     - --peer-client-cert-auth=true
     - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
