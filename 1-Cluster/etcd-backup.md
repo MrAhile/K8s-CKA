@@ -104,7 +104,7 @@ Next, it is necessary to stop the API Server, this can be done by moving the API
 sudo mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/
 ```
 
-Next it is necessary to modify the configuration of etcd so it take into account the new folder (the one containing the restored backup). Change this path in the etcd manifests (*/etc/kubernetes/manifests/etcd.yam*)
+Next it is necessary to modify the configuration of etcd so it take into account the new folder (the one containing the restored backup). Change this path in the etcd manifests (*/etc/kubernetes/manifests/etcd.yaml*)
 
 
 ```
