@@ -19,41 +19,35 @@ sudo journalctl -u kubelet
 
 2. Check the logs of the control-plane components
 
-If the master node is only named *master*, then you can get the logs using the following commands:
+If your control plane node is named *controlplane*, then you can get the logs using the following commands:
 
 ```
 # API server
-k -n kube-system logs kube-apiserver-master
+k -n kube-system logs kube-apiserver-controlplane
 
 # Controller Manager
-k -n kube-system logs kube-controller-manager-master
+k -n kube-system logs kube-controller-manager-controlplane
 
 # Scheduler
-k -n kube-system logs kube-scheduler-master
+k -n kube-system logs kube-scheduler-controlplane
 
 # etcd
-k -n kube-system logs etcd-master
+k -n kube-system logs etcd-controlplane
 ```
 
 3. Where are the control-plane log files located ?
 
-The log files of the control-plane components are located under */var/log/pods/*
+The log files of the control-plane components are located under */var/log/pods/* on the control plane node.
 
 ```
 ls /var/log/pods
-kube-system_etcd-master_6d694021cab77267a88779a2268199e6
-kube-system_kube-apiserver-master_0a48f4f4304a4deb4d06b553dc09b46c
-kube-system_kube-controller-manager-master_94d947d1226129a82876a3b7d829bbfc
-kube-system_kube-proxy-25w94_0c17e655-c491-43f6-b012-0eab0c7f8071
-kube-system_kube-scheduler-master_415ed7d85341035184628df29257fa2f
-kube-system_weave-net-66dtm_cef2efd7-9ea6-4604-a871-53ab915a7a84
+kube-system_kube-apiserver-controlplane_5a5ed5eae21579319207ea468e95b498
+kube-system_kube-controller-manager-controlplane_df0779e51a7e9b81028a512e0d0d3f51
+kube-system_kube-proxy-qkgmx_fc6ce579-e910-42df-9e63-0a733746df5b
+kube-system_kube-scheduler-controlplane_c529a0e58147976e9813a2df72cd8520
 ...
 ```
 
 Note: /var/log/pods also contains the log files of any other pods running on the node
 
 </details>
-
-
-
-
