@@ -104,79 +104,11 @@ Next, it is necessary to stop the API Server, this can be done by moving the API
 sudo mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/
 ```
 
-Next it is necessary to modify the configuration of etcd so it take into account the new folder (the one containing the restored backup). Change this path in the etcd manifests (*/etc/kubernetes/manifests/etcd.yaml*)
+Next it is necessary to modify the configuration of etcd so it take into account the new folder (the one containing the restored backup). Change this path in your etcd manifests (*/etc/kubernetes/manifests/etcd.yaml*), as illustrated in the following example:
 
 
 ```
-apiVersion: v1
-kind: Pod
-metadata:
-  annotations:
-    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://10.214.56.82:2379
-  creationTimestamp: null
-  labels:
-    component: etcd
-    tier: control-plane
-  name: etcd
-  namespace: kube-system
-spec:
-  containers:
-  - command:
-    - etcd
-    - --advertise-client-urls=https://10.214.56.82:2379
-    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
-    - --client-cert-auth=true
-    - --data-dir=/var/lib/etcd
-    - --initial-advertise-peer-urls=https://10.214.56.82:2380
-    - --initial-cluster=controlplane=https://10.214.56.82:2380
-    - --key-file=/etc/kubernetes/pki/etcd/server.key
-    - --listen-client-urls=https://127.0.0.1:2379,https://10.214.56.82:2379
-    - --listen-metrics-urls=http://127.0.0.1:2381
-    - --listen-peer-urls=https://10.214.56.82:2380
-    - --name=controlplane
-    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
-    - --peer-client-cert-auth=true
-    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
-    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
-    - --snapshot-count=10000
-    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
-    image: k8s.gcr.io/etcd:3.5.1-0
-    imagePullPolicy: IfNotPresent
-    livenessProbe:
-      failureThreshold: 8
-      httpGet:
-        host: 127.0.0.1
-        path: /health
-        port: 2381
-        scheme: HTTP
-      initialDelaySeconds: 10
-      periodSeconds: 10
-      timeoutSeconds: 15
-    name: etcd
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-    startupProbe:
-      failureThreshold: 24
-      httpGet:
-        host: 127.0.0.1
-        path: /health
-        port: 2381
-        scheme: HTTP
-      initialDelaySeconds: 10
-      periodSeconds: 10
-      timeoutSeconds: 15
-    volumeMounts:
-    - mountPath: /var/lib/etcd
-      name: etcd-data
-    - mountPath: /etc/kubernetes/pki/etcd
-      name: etcd-certs
-  hostNetwork: true
-  priorityClassName: system-node-critical
-  securityContext:
-    seccompProfile:
-      type: RuntimeDefault
+...
   volumes:
   - hostPath:
       path: /etc/kubernetes/pki/etcd
@@ -186,7 +118,6 @@ spec:
       path: /var/lib/etcd-snapshot          <- folder to change
       type: DirectoryOrCreate
     name: etcd-data
-status: {}
 ```
 
 After a few tens of seconds the etcd pods will be back online with the content of the backup.
