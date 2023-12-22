@@ -4,7 +4,7 @@
 
 2. Create the specification of a Pod named *nginx* based on the *nginx:1.20* image.
 
-3. Modify the specifciation making sure the Pod is scheduled on the node *worker1* and requests 1.5Gi of memory. Then create the resource and verify the pod is running.
+3. Modify the specification making sure the Pod is scheduled on the node *worker1* and requests 1.5Gi of memory. Then create the resource and verify the pod is running.
 
 Note: if your Pod stays in *Pending* you can use a lower value for the memory request to make sure it get deployed.
 
