@@ -92,23 +92,3 @@ controlplane    Ready    control-plane   10m     v1.27.5
 worker1         Ready    <none>          8m22s   v1.27.5
 worker2         Ready    <none>          7m42s   v1.27.5
 ```
-
-6. Get kubeconfig on your local machine
-
-First get the content of the kubeconfig file existing on the *controlplane* node and copy it in the *$HOME/kubeadm.kubeconfig* file on your local machine.
-
-Then configure your local *kubectl* client so it uses this kubeconfig file:
-
-```
-export KUBECONFIG=$HOME/kubeadm.kubeconfig
-```
-
-You can now communicate with the cluster from the host machine directly (without sshing on the controlplane node anymore)
-
-```
-$ kubectl get no
-NAME            STATUS   ROLES           AGE   VERSION
-controlplane    Ready    control-plane   13m   v1.27.5
-worker1         Ready    <none>          10m   v1.27.5
-worker2         Ready    <none>          10m   v1.27.5
-```
