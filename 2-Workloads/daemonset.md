@@ -158,7 +158,7 @@ Creation of the DaemonSet
 k apply -f spec.yaml
 ```
 
-Listing the Pods, we can see there is no Pod on the master:
+Listing the Pods, we can see there is no Pod on the controlplane node:
 
 ```
 k get po -o wide
@@ -166,25 +166,21 @@ log-2tzzd   1/1     Running       0          17s   10.38.0.3   worker2   <none> 
 log-smtmn   1/1     Running       0          17s   10.32.0.4   worker1   <none>           <none>
 ```
 
-This is due to the master's taint that the Pod does not tolerate. The command below shows the key and effect of that taint (you might need to install jq if it's not already on your machine):
+This is due to the controlplane's taint that the Pod does not tolerate. The command below shows the key and effect of that taint (you might need to install jq if it's not already on your machine):
 
 ```
-k get no master -o jsonpath={.spec.taints} | jq
+k get no controlplane -o jsonpath={.spec.taints} | jq
 [
   {
     "effect": "NoSchedule",
     "key": "node-role.kubernetes.io/control-plane"
-  },
-  {
-    "effect": "NoSchedule",
-    "key": "node-role.kubernetes.io/master"
   }
 ]
 ```
 
 3. Change the specification so there is a Pod on each node of the cluster
 
-We add the toleration so a Pod of the DaemonSet can also be scheduled on the master node:
+We add the toleration so a Pod of the DaemonSet can also be scheduled on the controlplane node:
 
 ```
 apiVersion: apps/v1
@@ -204,8 +200,6 @@ spec:
     spec:
       tolerations:
       - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
         effect: NoSchedule
       containers:
       - image: alpine:3.15
@@ -233,9 +227,9 @@ There is now one Pod per node:
 
 ```
 k get po -o wide
-log-2l2zz   1/1     Running   0          72s   10.40.0.1   master    <none>           <none>
-log-676qv   1/1     Running   0          37s   10.32.0.3   worker1   <none>           <none>
-log-m8q56   1/1     Running   0          5s    10.38.0.3   worker2   <none>           <none>
+log-2l2zz   1/1     Running   0          72s   10.40.0.1   controlplane    <none>           <none>
+log-676qv   1/1     Running   0          37s   10.32.0.3   worker1         <none>           <none>
+log-m8q56   1/1     Running   0          5s    10.38.0.3   worker2         <none>           <none>
 ```
 
 4. Verify the Pod can stream the node's log
