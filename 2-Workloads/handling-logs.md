@@ -12,6 +12,10 @@ Hint: nginx logs are located in */var/log/nginx/access.log* and */var/log/nginx/
 
 5. Delete the Pod
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/storage/volumes/#emptydir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+
 <details>
   <summary markdown="span">Solution</summary>
 
