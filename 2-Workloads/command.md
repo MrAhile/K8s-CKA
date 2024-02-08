@@ -6,6 +6,12 @@
 
 3. Delete the Pod
 
+## Documentation
+
+[https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/)
+
+[https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run)
+
 <details>
   <summary markdown="span">Solution</summary>
 
