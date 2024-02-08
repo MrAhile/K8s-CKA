@@ -6,7 +6,7 @@
 
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install ingress ingress-nginx/ingress-nginx --version 4.8.4
+helm install ingress ingress-nginx/ingress-nginx --version 4.9.1
 ```
 
 2. What is the type of Service exposing the ingress controller ?
@@ -32,7 +32,7 @@ Note: YOUR_HOST_IP is the IP of the machine on which you created the cluster's V
 
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install ingress ingress-nginx/ingress-nginx --version 4.8.4
+helm install ingress ingress-nginx/ingress-nginx --version 4.9.1
 ```
 
 2. What is the type of Service exposing the ingress controller ?
