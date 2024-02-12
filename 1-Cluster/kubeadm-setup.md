@@ -7,7 +7,7 @@ Make sure you have access to 3 virtual machines running Linux and identify these
 - *worker1*
 - *worker2*
 
-Note: make sure to reboot these VMs if you get the **restart required** when you connect with ssh
+Note: make sure to reboot these VMs if you get the **System Restart Required** when you connect with ssh
 
 For the next steps, I'd recommend you open 4 terminals, one on the host machine and one for each VM.
 
