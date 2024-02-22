@@ -17,6 +17,8 @@ Note: run the ```setup-lb.sh``` script located in the $HOME directory of your ho
 
 4. Create a pod named *ghost* based on the ghost:4 image and expose it with a ClusterIP service
 
+Note: l'application ghost écoute sur le port 2368
+
 5. Create an ingress resource that expose the above service on ghost.YOUR_HOST_IP.nip.io
 
 Note: YOUR_HOST_IP is the IP of the machine on which you created the cluster's VMs
@@ -24,6 +26,10 @@ Note: YOUR_HOST_IP is the IP of the machine on which you created the cluster's V
 6. Verify you can access the ghost web interface from the outside
 
 7. Delete the ingress resource, the pod and the service
+
+## Documentation
+
+[https://kubernetes.io/docs/concepts/services-networking/ingress/](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
 <details>
   <summary markdown="span">Solution</summary>
