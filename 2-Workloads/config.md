@@ -8,7 +8,7 @@
 
 4. Run a shell in the nginx container and verify both environment variables are present
 
-5. Create a pod named demo2 with a container based on *nginx:1.20*, make sure the content of the ConfigMap is available in files in */etc/app_cfg*r
+5. Create a pod named demo2 with a container based on *nginx:1.20*, make sure the content of the ConfigMap is available in files in */etc/app_cfg*
 
 6. Run a shell in the nginx container of pod demo2 and verify the content of /etc/app_cfg
 
