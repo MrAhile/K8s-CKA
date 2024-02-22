@@ -8,7 +8,7 @@
 
 4. Run the Pod. What happens ?
 
-5. Create a label on one of the cluster node so that the pod can be deployed. Make sure the Pod is running fine
+5. Create a label on one of the cluster's nodes so that the pod can be deployed. Make sure the Pod is running fine
 
 6. Delete the pod
 
@@ -116,7 +116,7 @@ Events:
 
 The Pod cannot be deployed because there is no node with the label requested by the *hard* constraint
 
-5. Create a label on one of the cluster node so that the Pod can be deployed. Make sure the Pod is running fine
+5. Create a label on one of the cluster's nodes so that the Pod can be deployed. Make sure the Pod is running fine
 
 We add a label *size: medium* on worker1
 
