@@ -8,7 +8,7 @@ Hint: nginx logs are located in */var/log/nginx/access.log* and */var/log/nginx/
 
 3. Add a sidecar container which reads the logs from the volume every 10 seconds and stream them on its standard output
 
-4. Run the pod and make sure both container are running fine
+4. Run the pod and make sure both container are running fine. Check the logs of the sidecar container, you should get the logs coming from nginx 
 
 5. Delete the Pod
 
