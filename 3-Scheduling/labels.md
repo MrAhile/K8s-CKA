@@ -10,6 +10,10 @@
 
 5. Delete the *disktype* label from *worker1*
 
+## Documentation
+
+[https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
