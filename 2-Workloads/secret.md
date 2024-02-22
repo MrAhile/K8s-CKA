@@ -10,7 +10,7 @@ token=cb3456a54EB5
 
 3. Create a Pod named *test*, with a single container based on the *alpine* image. Make sure this Pod has access to the content of the Secret in the */secrets/credentials* folder in the container's filesystem
 
-4. Run a shell in the Pod's container and verify the content of the */secrets/credentails/creds*
+4. Run a shell in the Pod's container and verify the content of the */secrets/credentials/creds*
 
 5. Delete the Pod and the Secret
 
