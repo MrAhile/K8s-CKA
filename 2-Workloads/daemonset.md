@@ -17,7 +17,8 @@ Note: path of the log files to stream is /var/log/pods/\*/\*/\*.log
 
 ## Documentation
 
-[https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+- [https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+- [https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 
 <details>
   <summary markdown="span">Solution</summary>
