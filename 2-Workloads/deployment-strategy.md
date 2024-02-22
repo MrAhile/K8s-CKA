@@ -4,7 +4,7 @@
 
 2. Create the deployment and wait for the pods to be up and running
 
-3. Change the specification so the image is nginx:1.18. Update the resource and observe how the pods are updated.
+3. Change the specification so the image is nginx:1.18. Update the resource and observe how the pods are updated using *kubectl get pod -w*
 
 4. Change the deployment strategy to *Recreate* and update the resource
 
