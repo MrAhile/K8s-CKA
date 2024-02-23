@@ -39,7 +39,9 @@ k run www --image=nginx:1.24
 
 4. List the events related to this Pod only
 
+```
 kubectl get events --field-selector involvedObject.name=www
+```
 
 5. List all the events related to the *Created* reason
 
