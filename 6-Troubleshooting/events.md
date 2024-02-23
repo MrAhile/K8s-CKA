@@ -52,7 +52,7 @@ kubectl get events --field-selector reason=Created
 6. List all the events related to a type different from *Normal*
 
 ```
-kubectl get events --field-selector type=Normal
+kubectl get events --field-selector type!=Normal
 ```
 
 </details>
