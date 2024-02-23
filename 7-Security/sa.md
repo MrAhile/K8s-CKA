@@ -17,6 +17,7 @@
 
 - [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 - [https://kubernetes.io/docs/concepts/security/service-accounts/](https://kubernetes.io/docs/concepts/security/service-accounts/)
+- [https://kubernetes.io/docs/reference/kubectl/generated/kubectl_auth/kubectl_auth_can-i/](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_auth/kubectl_auth_can-i/)
 
 <details>
   <summary markdown="span">Solution</summary>
