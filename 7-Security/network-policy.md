@@ -2,7 +2,7 @@
 
 1. Create a *dev* namespace
 
-2. Create a NetworkPolicy in the *dev* namespace to denies all ingress traffic for every Pod in this namespace
+2. Create a NetworkPolicy in the *dev* namespace to deny all ingress traffic for every Pod in this namespace
 
 3. Run 2 Pods in the *dev* namespace and verify they cannot communicate with each other
 
@@ -23,7 +23,7 @@
 k create ns dev
 ```
 
-2. Create a NetworkPolicy in the *dev* namespace to denies all ingress traffic for every Pod in this namespace
+2. Create a NetworkPolicy in the *dev* namespace to deny all ingress traffic for every Pod in this namespace
 
 Creation of NetworkPolicy:
 
