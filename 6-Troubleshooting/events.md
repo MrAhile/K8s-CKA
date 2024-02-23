@@ -12,6 +12,10 @@
 
 6. List all the events related to a type different from *Normal*
 
+## Documentation
+
+[https://kubernetes.io/docs/reference/kubectl/generated/kubectl_events/](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_events/)
+
 <details>
   <summary markdown="span">Solution</summary>
 
