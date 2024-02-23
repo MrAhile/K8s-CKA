@@ -61,6 +61,8 @@ The following command runs a HAProxy container on the host machine:
 
 This container acts as a load balancer in front of your worker nodes and exposes the Ingress Controller via ${YOUR_HOST_IP}.nip.io
 
+![LB](./images/ingress.png)
+
 4. Create a pod named *ghost* based on the ghost:4 image and expose it with a ClusterIP service
 
 ```
