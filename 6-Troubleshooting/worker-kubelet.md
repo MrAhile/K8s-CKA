@@ -1,6 +1,6 @@
 ## Exercise
 
-1. Verify sure all your worker nodes are healthy
+1. Verify that all your worker nodes are healthy
 
 2. Stop the kubelet process on the worker1
 
@@ -11,7 +11,7 @@
 <details>
   <summary markdown="span">Solution</summary>
 
-1. Verify sure all your worker nodes are healthy
+1. Verify that all your worker nodes are healthy
 
 List the nodes and make sure they all have the status Ready
 
