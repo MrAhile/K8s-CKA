@@ -18,19 +18,19 @@ First, using the following commands, install the dependencies (the container run
 - from a shell on the *controlplane* node:
 
 ```
-curl https://luc.run/kubeadm/controlplane.sh | VERSION=1.27.5 sh
+curl https://luc.run/kubeadm/controlplane.sh | sh
 ```
 
 - from a shell on *worker1*:
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.27.5 sh
+curl https://luc.run/kubeadm/worker.sh | sh
 ```
 
 - from a shell on *worker2*
 
 ```
-curl https://luc.run/kubeadm/worker.sh | VERSION=1.27.5 sh
+curl https://luc.run/kubeadm/worker.sh | sh
 ```
 
 3. Initialisation of the cluster
@@ -66,9 +66,9 @@ When this is done, go back to the *controlplane* node and list the cluster's nod
 ```
 kubectl get no
 NAME            STATUS     ROLES           AGE     VERSION
-controlplane    NotReady   control-plane   7m7s    v1.27.5
-worker1         NotReady   <none>          4m54s   v1.27.5
-worker2         NotReady   <none>          4m14s   v1.27.5
+controlplane    NotReady   control-plane   7m7s    v1.28.8
+worker1         NotReady   <none>          4m54s   v1.28.8
+worker2         NotReady   <none>          4m14s   v1.28.8
 ```
 
 5. Network plugin
@@ -90,7 +90,7 @@ After a few tens of seconds the cluster will be ready:
 ```
 $ kubectl get no
 NAME            STATUS   ROLES           AGE     VERSION
-controlplane    Ready    control-plane   10m     v1.27.5
-worker1         Ready    <none>          8m22s   v1.27.5
-worker2         Ready    <none>          7m42s   v1.27.5
+controlplane    Ready    control-plane   10m     v1.28.8
+worker1         Ready    <none>          8m22s   v1.28.8
+worker2         Ready    <none>          7m42s   v1.28.8
 ```
