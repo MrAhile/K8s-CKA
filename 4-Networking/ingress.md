@@ -19,9 +19,9 @@ Note: run the ```setup-lb.sh``` script located in the $HOME directory of your ho
 
 Note: l'application ghost écoute sur le port 2368
 
-5. Create an ingress resource that expose the above service on ghost.YOUR_HOST_IP.nip.io
+5. Create an ingress resource that expose the above service on ghost.ADMIN_VM_IP.nip.io
 
-Note: YOUR_HOST_IP is the IP of the machine on which you created the cluster's VMs
+Note: ADMIN_VM_IP is the IP address of your admin VM
 
 6. Verify you can access the ghost web interface from the outside
 
@@ -59,7 +59,7 @@ The following command runs a HAProxy container on the host machine:
 ./setup-lb.sh 
 ```
 
-This container acts as a load balancer in front of your worker nodes and exposes the Ingress Controller via ${YOUR_HOST_IP}.nip.io
+This container acts as a load balancer in front of your worker nodes and exposes the Ingress Controller via ${ADMIN_VM_IP}.nip.io
 
 ![LB](./images/ingress.png)
 
@@ -69,12 +69,12 @@ This container acts as a load balancer in front of your worker nodes and exposes
 k run ghost --image=ghost:4 --port 2368 --expose
 ```
 
-5. Create an ingress resource that expose the above service on ghost.YOUR_HOST_IP.nip.io
+5. Create an ingress resource that expose the above service on ghost.ADMIN_VM_IP.nip.io
 
 In this example the public IP adress of the host machine is *89.145.162.32*
 
 ```
-EXTERNAL_IP=89.145.162.32
+ADMIN_VM_IP=89.145.162.32
 cat <<EOF | k apply -f -
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -83,7 +83,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: ghost.$EXTERNAL_IP.nip.io
+  - host: ghost.$ADMIN_VM_IP.nip.io
     http:
       paths:
       - path: /
@@ -98,7 +98,7 @@ EOF
 
 6. Verify you can access the ghost web interface from the outside
 
-The ghost web interface can be accessed using the *ghost.YOUR_HOST_IP.nip.io* domain name (this one is resolved by nip.io)
+The ghost web interface can be accessed using the *ghost.ADMIN_VM_IP.nip.io* domain name (this one is resolved by nip.io)
 
 ![ghost](./images/ghost.png)
 
