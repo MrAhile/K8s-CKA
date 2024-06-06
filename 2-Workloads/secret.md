@@ -8,7 +8,7 @@ token=cb3456a54EB5
 
 2. Create a Secret named *credentials*, of type *generic*, from the file *private.txt*. Make sure the key under the *data* property of the secret is *creds*
 
-3. Create a Pod named *test*, with a single container based on the *alpine* image. Make sure this Pod has access to the content of the Secret in the */secrets/credentials* folder in the container's filesystem
+3. Create a Pod named *test*, with a single container based on the *alpine* image and running the "sleep 3600" command. Make sure this Pod has access to the content of the Secret in the */secrets/credentials* folder in the container's filesystem
 
 4. Run a shell in the Pod's container and verify the content of the */secrets/credentials/creds*
 
@@ -48,7 +48,7 @@ metadata:
 type: Opaque
 ```
 
-3. Create a Pod named *test*, with a single container based on the *alpine* image. Make sure this Pod has access to the content of the Secret in the */secrets/credentials* folder in the container's filesystem
+3. Create a Pod named *test*, with a single container based on the *alpine* image and running the "sleep 10000" command. Make sure this Pod has access to the content of the Secret in the */secrets/credentials* folder in the container's filesystem
 
 ```
 apiVersion: v1
