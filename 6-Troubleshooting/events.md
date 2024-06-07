@@ -2,7 +2,7 @@
 
 1. List all the events in the cluster
 
-2. List the same events sorted by timestamp
+2. List the same events sorted by the creationTimestamp
 
 3. Create a pod named *www* based on nginx
 
@@ -25,7 +25,7 @@
 k get events -A
 ```
 
-2. List the same events sorted by timestamp
+2. List the same events sorted by the creationTimestamp
 
 ```
 k get events --sort-by={.metadata.creationTimestamp}
